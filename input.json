@@ -1,0 +1,12 @@
+{
+  "feature_store": "fake_data",
+  "sanitization": {
+    "remove_nulls": [
+      "client_id",
+      "status_transacao",
+      "valor"
+    ],
+    "exclude": {"status_transacao": "('69', '420')"},
+    "include_only": {"destino": [90090990]}
+  }
+}
