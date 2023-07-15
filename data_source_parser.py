@@ -2,10 +2,13 @@ import json
 from pprint import pprint
 from typing import Dict, Any
 from fake_data import FakeData
+from services import get_logger
 from utils import SANITIZATION_TRANSFORMATIONS
 from pyspark.sql import DataFrame
 
 POSSIBILITIES: Dict[str, Any] = {"fake_data": FakeData}
+
+logger = get_logger(__name__)
 
 
 class DataSourceParser:
@@ -20,6 +23,7 @@ class DataSourceParser:
         )
 
     def apply_sanitization(self, df: DataFrame):
+        logger.info("Applying sanitization")
         df.show()
         df.printSchema()
         for sanitization_rule in self.__content.get("sanitization", {}):

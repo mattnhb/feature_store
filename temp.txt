@@ -1,0 +1,8 @@
+== Physical Plan ==
+*(1) Filter (NOT cast(status_transacao#8L as string) IN (69,420) AND NOT cast(ano#2L as string) IN (2023,2021))
++- *(1) Scan ExistingRDD[client_id#0,data_transacao#1,ano#2L,mes#3L,dia#4L,produto_origem#5,destino#6,valor#7L,status_transacao#8L]
+
+== Physical Plan ==
+*(1) Filter (isnotnull(ano#2L) AND (status_transacao#8L IN (69,420) AND (cast(ano#2L as string) = ('2023', '2021'))))
++- *(1) Scan ExistingRDD[client_id#0,data_transacao#1,ano#2L,mes#3L,dia#4L,produto_origem#5,destino#6,valor#7L,status_transacao#8L]
+

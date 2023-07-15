@@ -7,10 +7,13 @@
       "valor"
     ],
     "exclude": {
-      "status_transacao": "('69', '420')"
+      "status_transacao": [69, 420]
     },
     "include_only": {
-      "destino": "(90090990)"
+      "destino": ["90090990", "24234234"]
     }
+  },
+  "transformations": {
+
   }
 }
