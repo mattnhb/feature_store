@@ -6,7 +6,11 @@
       "status_transacao",
       "valor"
     ],
-    "exclude": {"status_transacao": "('69', '420')"},
-    "include_only": {"destino": [90090990]}
+    "exclude": {
+      "status_transacao": "('69', '420')"
+    },
+    "include_only": {
+      "destino": "(90090990)"
+    }
   }
 }

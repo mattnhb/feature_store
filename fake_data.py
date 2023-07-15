@@ -52,7 +52,7 @@ valores_status_transacao: List[str] = [
     "85",
     "69",
     "420",
-] + [None] * 0
+]
 
 
 class FakeData:
@@ -71,7 +71,7 @@ class FakeData:
                     produto_origem=choice(valores_produto_origem),
                     destino=choice(valores_destino),
                     valor=fake.pyint(),
-                    status_transacao=choice(valores_status_transacao),
+                    status_transacao=int(choice(valores_status_transacao)),
                 )
                 for date in valores_datas
             ]

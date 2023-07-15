@@ -22,8 +22,17 @@ def exclude(
     return df
 
 
+def include_only(
+    df: DataFrame, to_include: Dict[str, Any], *args, **kwargs
+) -> DataFrame:
+    for field in to_include:
+        print(f"{field} in {to_include.get(field)}")
+        df = df.filter(f"{field} in {to_include.get(field)}")
+    return df
+
+
 SANITIZATION_TRANSFORMATIONS = {
     "remove_nulls": remove_nulls,
     "exclude": exclude,
-    "include_only": placeholder,
+    "include_only": include_only,
 }
