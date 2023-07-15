@@ -7,13 +7,29 @@
       "valor"
     ],
     "exclude": {
-      "status_transacao": [69, 420]
+      "status_transacao": [
+        69,
+        420
+      ]
     },
     "include_only": {
-      "destino": ["90090990", "24234234"]
+      "destino": [
+        "90090990",
+        "24234234"
+      ]
     }
   },
   "transformations": {
-
+  },
+  "writing": {
+    "partitions": [
+        "produto_origem",
+        "ano",
+        "mes",
+        "dia"
+      ],
+    "saving_path": "S3",
+    "saving_format": "parquet",
+    "saving_mode": "overwrite"
   }
 }

@@ -1,14 +1,17 @@
-from pyspark.sql import SparkSession
-
-spark = SparkSession.builder.appName("Feature Store").getOrCreate()
+from pyspark.sql import SparkSession, DataFrame
 
 
 class DataWriter:
-    def save(self, df):
+    @staticmethod
+    def save(df: DataFrame, writing_details):
         (
-            df.repartition(*["ano", "mes", "dia"])
-            .write.format("parquet")
-            .mode("overwrite")
-            .partitionBy(*["ano", "mes", "dia"])
-            .save("S3")
+            df.repartition(*writing_details.get("partitions"))
+            .write.option(
+                "partitionOverwriteMode",
+                writing_details.get("partitionOverwriteMode", "dynamic"),
+            )
+            .format(writing_details.get("saving_format"))
+            .mode(writing_details.get("saving_mode"))
+            .partitionBy(*writing_details.get("partitions"))
+            .save(writing_details.get("saving_path"))
         )
