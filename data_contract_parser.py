@@ -5,6 +5,7 @@ from typing import Dict, Any
 from pyspark.sql.functions import lit
 
 from data_sanitizer import DataSanitizer
+from data_transformation import DataTransformer
 from data_writer import DataWriter
 from fake_data import FakeData
 from services import get_logger
@@ -23,8 +24,24 @@ class DataContractParser:
         # pprint(self.__content)
 
     def extract(self) -> DataFrame:
-        return self.apply_sanitization(
-            POSSIBILITIES.get(self.__content["feature_store"])().load_data()
+        return self.apply_transformation(
+            self.apply_sanitization(
+                POSSIBILITIES.get(
+                    self.__content["feature_store"]
+                )().load_data()
+            )
+        )
+
+    def apply_transformation(self, df: DataFrame):
+        logger.info(
+            "Applying transformations %s",
+            self.__content.get("transformations", {}),
+        )
+        df.show()
+        df.printSchema()
+        return DataTransformer.transform(
+            df,
+            transformation_details=self.__content.get("transformations", {}),
         )
 
     def apply_sanitization(self, df: DataFrame):
@@ -40,4 +57,5 @@ class DataContractParser:
     def create_visions(self):
         df = self.extract()
         df.show()
-        DataWriter.save(df, writing_details=self.__content.get("writing"))
+        df.printSchema()
+        # DataWriter.save(df, writing_details=self.__content.get("writing"))

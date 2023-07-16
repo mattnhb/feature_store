@@ -20,6 +20,14 @@
     }
   },
   "transformations": {
+    "rename": {
+      "destino": "estabelecimento",
+      "valor": "value"
+    },
+    "cast": {
+      "status_transacao": "string",
+      "ano": "float"
+    }
   },
   "writing": {
     "partitions": [
