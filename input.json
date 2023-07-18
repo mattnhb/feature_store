@@ -1,21 +1,17 @@
 {
-  "feature_store": "fake_data",
+  "feature_store": "fakedata",
   "sanitization": {
     "remove_nulls": [
       "client_id",
       "status_transacao",
       "valor"
     ],
-    "exclude": {
-      "status_transacao": [
-        69,
-        420
-      ]
-    },
     "include_only": {
-      "destino": [
-        "90090990",
-        "24234234"
+      "status_transacao": [
+        "00",
+        "10",
+        "11",
+        "85"
       ]
     }
   },
@@ -25,17 +21,42 @@
       "valor": "value"
     },
     "cast": {
-      "status_transacao": "string",
-      "ano": "float"
+      "status_transacao": "string"
+    },
+    "extract_dayofweek": {
+      "data_transacao": "dia_semana"
+    },
+    "case_when": {
+      "subproduto": {
+        "debito_com_autenticacao": "produto_origem in ('CARDLESS', 'CARDLESS', 'COMPRA ECOMMERCE 3DS', 'COMPRA INTERNACIONAL CHIP E SENHA', 'COMPRA INTERNACIONAL CHIP E SENHA OFFLINE', 'COMPRA INTERNACIONAL CONTACTLESS COM SENHA', 'COMPRA INTERNACIONAL TOKEN SEM SENHA', 'COMPRA NACIONAL COM CHIP E SENHA', 'COMPRA NACIONAL CONTACTLESS COM SENHA', 'COMPRA NACIONAL CONTACTLESS INSS COM SENHA', 'COMPRA NACIONAL INSS COM CHIP E SENHA', 'COMPRA NACIONAL TOKEN COM SENHA', 'COMPRA NACIONAL TOKEN SEM SENHA', 'SAQUE INTERNACIONAL')",
+        "debito_sem_autenticacao": "produto_origem in ('M4M NACIONAL', 'DEBITO SEM SENHA INTERNACIONAL', 'DEBITO SEM SENHA NACIONAL', 'M4M INTERNACIONAL')",
+        "contactless_sem_autentificacao": "produto_origem in ('COMPRA INTERNACIONAL CONTACTLESS SEM SENHA', 'COMPRA NACIONAL CONTACTLESS INSS SEM SENHA', 'COMPRA NACIONAL CONTACTLESS SEM SENHA', 'MTT RETENTATIVA')",
+        "else": "Transacoes nao contabilizadas"
+      },
+      "estabelecimento": {
+        "pedrinho": "estabelecimento == 24234234",
+        "else": "uepa"
+      },
+      "nome_dia": {
+        "else": "erro",
+        "Domingo": "dia_semana == '1'",
+        "Segunda-Feira": "dia_semana == '2'",
+        "Terca-Feira": "dia_semana == '3'",
+        "Quarta-Feira": "dia_semana == '4'",
+        "Quinta-Feira": "dia_semana == '5'",
+        "Sexta-Feira": "dia_semana == '6'",
+        "Sabado": "dia_semana == '7'"
+      }
     }
   },
+  "extra_transformations": true,
   "writing": {
     "partitions": [
-        "produto_origem",
-        "ano",
-        "mes",
-        "dia"
-      ],
+      "subproduto",
+      "ano",
+      "mes",
+      "dia"
+    ],
     "saving_path": "S3",
     "saving_format": "parquet",
     "saving_mode": "overwrite"

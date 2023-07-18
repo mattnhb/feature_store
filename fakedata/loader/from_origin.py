@@ -7,6 +7,8 @@ from pyspark.sql import Row
 from random import choice
 from datetime import datetime
 
+from base.from_origin import BaseOriginData
+
 sc = SparkContext()
 
 spark = SparkSession.builder.appName("Feature Store").getOrCreate()
@@ -55,10 +57,7 @@ valores_status_transacao: List[str] = [
 ]
 
 
-class FakeData:
-    def __init__(self):
-        pass
-
+class FakeData(BaseOriginData):
     def load_data(self):
         return spark.createDataFrame(
             [

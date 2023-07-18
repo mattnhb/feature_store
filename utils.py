@@ -1,9 +1,10 @@
+from collections import defaultdict
 from functools import reduce
 from operator import and_
 from typing import List, Any, Dict, Callable, Union
 
 from pyspark.sql import DataFrame
-from pyspark.sql.functions import col
+from pyspark.sql import functions as F
 
 
 def _placeholder(df, *args, **kwargs):
@@ -11,7 +12,7 @@ def _placeholder(df, *args, **kwargs):
 
 
 def _filter_reducer(
-    df: DataFrame, operator, generator_expression
+        df: DataFrame, operator, generator_expression
 ) -> DataFrame:
     return df.filter(
         reduce(
@@ -22,7 +23,7 @@ def _filter_reducer(
 
 
 def with_column_reducer(
-    callable_: Callable, collection: Union[List, Dict], df: DataFrame
+        callable_: Callable, collection: Union[List, Dict], df: DataFrame
 ) -> DataFrame:
     return reduce(
         callable_,
@@ -34,36 +35,39 @@ def with_column_reducer(
 class __Sanitization:
     @staticmethod
     def remove_nulls(
-        df: DataFrame, fields: List[str], *args, **kwargs
-    ) -> DataFrame:
-        return _filter_reducer(
-            df,
-            operator=and_,
-            generator_expression=(col(field).isNotNull() for field in fields),
-        )
-
-    @staticmethod
-    def exclude(
-        df: DataFrame, to_exclude: Dict[str, Any], *args, **kwargs
+            df: DataFrame, fields: List[str], *args, **kwargs
     ) -> DataFrame:
         return _filter_reducer(
             df,
             operator=and_,
             generator_expression=(
-                ~col(field).isin(to_exclude.get(field))
+                F.col(field).isNotNull() for field in fields
+            ),
+        )
+
+    @staticmethod
+    def exclude(
+            df: DataFrame, to_exclude: Dict[str, Any], *args, **kwargs
+    ) -> DataFrame:
+        return _filter_reducer(
+            df,
+            operator=and_,
+            generator_expression=(
+                ~F.col(field).isin(to_exclude.get(field))
                 for field in to_exclude
             ),
         )
 
     @staticmethod
     def include_only(
-        df: DataFrame, to_include: Dict[str, Any], *args, **kwargs
+            df: DataFrame, to_include: Dict[str, Any], *args, **kwargs
     ) -> DataFrame:
         return _filter_reducer(
             df,
             operator=and_,
             generator_expression=(
-                col(field).isin(to_include.get(field)) for field in to_include
+                F.col(field).isin(to_include.get(field))
+                for field in to_include
             ),
         )
 
@@ -71,7 +75,7 @@ class __Sanitization:
 class __Transformation:
     @staticmethod
     def rename(
-        df: DataFrame, to_rename: Dict[str, Any], *args, **kwargs
+            df: DataFrame, to_rename: Dict[str, Any], *args, **kwargs
     ) -> DataFrame:
         return with_column_reducer(
             callable_=lambda _df, column_name: _df.withColumnRenamed(
@@ -83,7 +87,7 @@ class __Transformation:
 
     @staticmethod
     def cast(
-        df: DataFrame, to_cast: Dict[str, Any], *args, **kwargs
+            df: DataFrame, to_cast: Dict[str, Any], *args, **kwargs
     ) -> DataFrame:
         return with_column_reducer(
             callable_=lambda _df, column_name: _df.withColumn(
@@ -93,11 +97,46 @@ class __Transformation:
             df=df,
         )
 
+    @staticmethod
+    def case_when(
+            df: DataFrame, conditions: Dict[str, Any], *args, **kwargs
+    ) -> DataFrame:
+        for column_name in conditions:
+            else_statement = "else " + repr(conditions.get(column_name, {}).pop(
+                "else", " "
+            ))
+            df = df.withColumn(
+                column_name,
+                F.expr(
+                    f"""
+                case {"".join(
+                        f"when {when} then {repr(then)} "
+                        for then, when in conditions.get(column_name, {}).items()
+                    ) + else_statement} end"""
+                ),
+            )
+        return df
 
-RULES: Dict[str, Callable] = {
+    @staticmethod
+    def day_of_week(
+            df: DataFrame, data_columns: Dict[str, Any], *args, **kwargs
+    ) -> DataFrame:
+        return with_column_reducer(
+            callable_=lambda _df, column_name: _df.withColumn(
+                data_columns.get(column_name), F.dayofweek(column_name)
+            ),
+            collection=data_columns,
+            df=df,
+        )
+
+
+RULES = defaultdict(_placeholder, {
     "remove_nulls": __Sanitization.remove_nulls,
     "exclude": __Sanitization.exclude,
     "include_only": __Sanitization.include_only,
     "rename": __Transformation.rename,
     "cast": __Transformation.cast,
-}
+    "case_when": __Transformation.case_when,
+    "extract_dayofweek": __Transformation.day_of_week,
+    "columns_to_keep": "*"
+})

@@ -1,18 +1,26 @@
 import json
+from importlib import import_module
 from pprint import pprint
 from typing import Dict, Any
-
 from pyspark.sql.functions import lit
 
 from data_sanitizer import DataSanitizer
 from data_transformation import DataTransformer
 from data_writer import DataWriter
-from fake_data import FakeData
+from debito.loader.from_origin import DebitoOriginData
+from fakedata.loader.from_origin import FakeData
+from pix.loader.from_origin import PixOriginData
+from tef.loader.from_origin import TefOriginData
 from services import get_logger
 
 from pyspark.sql import DataFrame
 
-POSSIBILITIES: Dict[str, Any] = {"fake_data": FakeData}
+POSSIBILITIES: Dict[str, Any] = {
+    "debito": DebitoOriginData,
+    "pix": PixOriginData,
+    "tef": TefOriginData,
+    "fakedata": FakeData,
+}
 
 logger = get_logger(__name__)
 
@@ -24,11 +32,13 @@ class DataContractParser:
         # pprint(self.__content)
 
     def extract(self) -> DataFrame:
-        return self.apply_transformation(
-            self.apply_sanitization(
-                POSSIBILITIES.get(
-                    self.__content["feature_store"]
-                )().load_data()
+        return self.apply_extra_transformations(
+            self.apply_transformation(
+                self.apply_sanitization(
+                    POSSIBILITIES.get(
+                        self.__content["feature_store"]
+                    )().load_data()
+                )
             )
         )
 
@@ -54,8 +64,17 @@ class DataContractParser:
             df, sanitization_details=self.__content.get("sanitization", {})
         )
 
-    def create_visions(self):
+    def apply_extra_transformations(self, df: DataFrame) -> DataFrame:
+        if self.__content.get("extra_transformations", False):
+            logger.info("Applying extra transformations")
+            module = import_module(
+                f"{self.__content['feature_store']}.extra_transformation"
+            )
+            df = module.ExtraTransformer().apply_extra_transformation(df)
+        return df
+
+    def create_snapshots(self):
         df = self.extract()
-        df.show()
+        df.show(truncate=False)
         df.printSchema()
-        # DataWriter.save(df, writing_details=self.__content.get("writing"))
+        DataWriter.save(df, writing_details=self.__content.get("writing"))
