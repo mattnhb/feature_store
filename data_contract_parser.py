@@ -77,4 +77,4 @@ class DataContractParser:
         df = self.extract()
         df.show(truncate=False)
         df.printSchema()
-        DataWriter.save(df, writing_details=self.__content.get("writing"))
+        # DataWriter.save(df, writing_details=self.__content.get("writing"))

@@ -102,20 +102,38 @@ class __Transformation:
             df: DataFrame, conditions: Dict[str, Any], *args, **kwargs
     ) -> DataFrame:
         for column_name in conditions:
-            else_statement = "else " + repr(conditions.get(column_name, {}).pop(
-                "else", " "
-            ))
+            # else_statement = "else " + repr(else_present) if (else_present := conditions.get(column_name, {}).pop("else", False)) else ""
+            # print(else_statement)
+            # print(f"""
+            #     case {"".join(
+            #             f"when {when} then {repr(then)} "
+            #             for then, when in conditions.get(column_name, {}).items()
+            #         ) + ("else " + repr(else_present) if (else_present := conditions.get(column_name, {}).pop("else", False)) else "")} end""")
             df = df.withColumn(
                 column_name,
                 F.expr(
                     f"""
                 case {"".join(
                         f"when {when} then {repr(then)} "
-                        for then, when in conditions.get(column_name, {}).items()
-                    ) + else_statement} end"""
+                        for then, when in conditions.get(column_name, {}).items() if then != "else"
+                    ) + ("else " + repr(else_present) if (else_present := conditions.get(column_name, {}).pop("else", False)) else "")} end"""
                 ),
             )
         return df
+        # return with_column_reducer(
+        #     callable_=lambda _df, column_name: _df.withColumn(
+        #         column_name,
+        #         F.expr(
+        #             f"""
+        #         case {"".join(
+        #                 f"when {when} then {repr(then)} "
+        #                 for then, when in conditions.get(column_name, {}).items()
+        #             ) + 'else ' + repr(conditions.get(column_name, {}).pop('else', ' ')} end"""
+        #         ),
+        #     ),
+        #     collection=conditions,
+        #     df=df,
+        # )
 
     @staticmethod
     def day_of_week(
