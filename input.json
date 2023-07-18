@@ -40,7 +40,10 @@
         "else": "erro",
         "Domingo": "dia_semana == '1'",
         "Segunda-Feira": "dia_semana == '2'",
-
+        "Terca-Feira": "dia_semana == '3'",
+        "Quarta-Feira": "dia_semana == '4'",
+        "Quinta-Feira": "dia_semana == '5'",
+        "Sexta-Feira": "dia_semana == '6'",
         "Sabado": "dia_semana == '7'"
       }
     }

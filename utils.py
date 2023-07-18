@@ -12,7 +12,7 @@ def _placeholder(df, *args, **kwargs):
 
 
 def _filter_reducer(
-        df: DataFrame, operator, generator_expression
+    df: DataFrame, operator, generator_expression
 ) -> DataFrame:
     return df.filter(
         reduce(
@@ -23,7 +23,7 @@ def _filter_reducer(
 
 
 def with_column_reducer(
-        callable_: Callable, collection: Union[List, Dict], df: DataFrame
+    callable_: Callable, collection: Union[List, Dict], df: DataFrame
 ) -> DataFrame:
     return reduce(
         callable_,
@@ -35,7 +35,7 @@ def with_column_reducer(
 class __Sanitization:
     @staticmethod
     def remove_nulls(
-            df: DataFrame, fields: List[str], *args, **kwargs
+        df: DataFrame, fields: List[str], *args, **kwargs
     ) -> DataFrame:
         return _filter_reducer(
             df,
@@ -47,7 +47,7 @@ class __Sanitization:
 
     @staticmethod
     def exclude(
-            df: DataFrame, to_exclude: Dict[str, Any], *args, **kwargs
+        df: DataFrame, to_exclude: Dict[str, Any], *args, **kwargs
     ) -> DataFrame:
         return _filter_reducer(
             df,
@@ -60,7 +60,7 @@ class __Sanitization:
 
     @staticmethod
     def include_only(
-            df: DataFrame, to_include: Dict[str, Any], *args, **kwargs
+        df: DataFrame, to_include: Dict[str, Any], *args, **kwargs
     ) -> DataFrame:
         return _filter_reducer(
             df,
@@ -75,7 +75,7 @@ class __Sanitization:
 class __Transformation:
     @staticmethod
     def rename(
-            df: DataFrame, to_rename: Dict[str, Any], *args, **kwargs
+        df: DataFrame, to_rename: Dict[str, Any], *args, **kwargs
     ) -> DataFrame:
         return with_column_reducer(
             callable_=lambda _df, column_name: _df.withColumnRenamed(
@@ -87,7 +87,7 @@ class __Transformation:
 
     @staticmethod
     def cast(
-            df: DataFrame, to_cast: Dict[str, Any], *args, **kwargs
+        df: DataFrame, to_cast: Dict[str, Any], *args, **kwargs
     ) -> DataFrame:
         return with_column_reducer(
             callable_=lambda _df, column_name: _df.withColumn(
@@ -99,45 +99,27 @@ class __Transformation:
 
     @staticmethod
     def case_when(
-            df: DataFrame, conditions: Dict[str, Any], *args, **kwargs
+        df: DataFrame, conditions: Dict[str, Any], *args, **kwargs
     ) -> DataFrame:
-        for column_name in conditions:
-            # else_statement = "else " + repr(else_present) if (else_present := conditions.get(column_name, {}).pop("else", False)) else ""
-            # print(else_statement)
-            # print(f"""
-            #     case {"".join(
-            #             f"when {when} then {repr(then)} "
-            #             for then, when in conditions.get(column_name, {}).items()
-            #         ) + ("else " + repr(else_present) if (else_present := conditions.get(column_name, {}).pop("else", False)) else "")} end""")
-            df = df.withColumn(
+        return with_column_reducer(
+            callable_=lambda _df, column_name: _df.withColumn(
                 column_name,
                 F.expr(
                     f"""
-                case {"".join(
+                        case {"".join(
                         f"when {when} then {repr(then)} "
                         for then, when in conditions.get(column_name, {}).items() if then != "else"
-                    ) + ("else " + repr(else_present) if (else_present := conditions.get(column_name, {}).pop("else", False)) else "")} end"""
+                    ) + ("else " + repr(else_present) if (
+                        else_present := conditions.get(column_name, {}).pop("else", False)) else "")} end"""
                 ),
-            )
-        return df
-        # return with_column_reducer(
-        #     callable_=lambda _df, column_name: _df.withColumn(
-        #         column_name,
-        #         F.expr(
-        #             f"""
-        #         case {"".join(
-        #                 f"when {when} then {repr(then)} "
-        #                 for then, when in conditions.get(column_name, {}).items()
-        #             ) + 'else ' + repr(conditions.get(column_name, {}).pop('else', ' ')} end"""
-        #         ),
-        #     ),
-        #     collection=conditions,
-        #     df=df,
-        # )
+            ),
+            collection=conditions,
+            df=df,
+        )
 
     @staticmethod
     def day_of_week(
-            df: DataFrame, data_columns: Dict[str, Any], *args, **kwargs
+        df: DataFrame, data_columns: Dict[str, Any], *args, **kwargs
     ) -> DataFrame:
         return with_column_reducer(
             callable_=lambda _df, column_name: _df.withColumn(
@@ -148,13 +130,16 @@ class __Transformation:
         )
 
 
-RULES = defaultdict(_placeholder, {
-    "remove_nulls": __Sanitization.remove_nulls,
-    "exclude": __Sanitization.exclude,
-    "include_only": __Sanitization.include_only,
-    "rename": __Transformation.rename,
-    "cast": __Transformation.cast,
-    "case_when": __Transformation.case_when,
-    "extract_dayofweek": __Transformation.day_of_week,
-    "columns_to_keep": "*"
-})
+RULES = defaultdict(
+    _placeholder,
+    {
+        "remove_nulls": __Sanitization.remove_nulls,
+        "exclude": __Sanitization.exclude,
+        "include_only": __Sanitization.include_only,
+        "rename": __Transformation.rename,
+        "cast": __Transformation.cast,
+        "case_when": __Transformation.case_when,
+        "extract_dayofweek": __Transformation.day_of_week,
+        "columns_to_keep": "*",
+    },
+)
