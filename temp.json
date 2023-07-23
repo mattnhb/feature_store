@@ -1,0 +1,534 @@
+{
+  "contactless_sem_autentificacao": {
+    "ultimos_180_dias": {
+      "diurno": {
+        "count": 38,
+        "soma": 162693,
+        "media": 4281.394736842105
+      },
+      "final_semana": {
+        "count": 9,
+        "soma": 27250,
+        "media": 3027.777777777778
+      },
+      "geral": {
+        "count": 39,
+        "soma": 166243,
+        "media": 4262.641025641025
+      },
+      "noturno": {
+        "count": 11,
+        "soma": 44191,
+        "media": 4017.3636363636365
+      }
+    },
+    "ultimos_270_dias": {
+      "diurno": {
+        "count": 38,
+        "soma": 162693,
+        "media": 4281.394736842105
+      },
+      "final_semana": {
+        "count": 9,
+        "soma": 27250,
+        "media": 3027.777777777778
+      },
+      "geral": {
+        "count": 39,
+        "soma": 166243,
+        "media": 4262.641025641025
+      },
+      "noturno": {
+        "count": 11,
+        "soma": 44191,
+        "media": 4017.3636363636365
+      }
+    },
+    "ultimos_30_dias": {
+      "diurno": {
+        "count": 25,
+        "soma": 100670,
+        "media": 4026.8
+      },
+      "final_semana": {
+        "count": 5,
+        "soma": 8663,
+        "media": 1732.6
+      },
+      "geral": {
+        "count": 26,
+        "soma": 104220,
+        "media": 4008.4615384615386
+      },
+      "noturno": {
+        "count": 7,
+        "soma": 29819,
+        "media": 4259.857142857143
+      }
+    },
+    "ultimos_365_dias": {
+      "diurno": {
+        "count": 38,
+        "soma": 162693,
+        "media": 4281.394736842105
+      },
+      "final_semana": {
+        "count": 9,
+        "soma": 27250,
+        "media": 3027.777777777778
+      },
+      "geral": {
+        "count": 39,
+        "soma": 166243,
+        "media": 4262.641025641025
+      },
+      "noturno": {
+        "count": 11,
+        "soma": 44191,
+        "media": 4017.3636363636365
+      }
+    },
+    "ultimos_7_dias": {
+      "diurno": {
+        "count": 8,
+        "soma": 33727,
+        "media": 4215.875
+      },
+      "final_semana": {
+        "count": 2,
+        "soma": 4490,
+        "media": 2245.0
+      },
+      "geral": {
+        "count": 8,
+        "soma": 33727,
+        "media": 4215.875
+      },
+      "noturno": {
+        "count": 2,
+        "soma": 8552,
+        "media": 4276.0
+      }
+    },
+    "ultimos_90_dias": {
+      "diurno": {
+        "count": 38,
+        "soma": 162693,
+        "media": 4281.394736842105
+      },
+      "final_semana": {
+        "count": 9,
+        "soma": 27250,
+        "media": 3027.777777777778
+      },
+      "geral": {
+        "count": 39,
+        "soma": 166243,
+        "media": 4262.641025641025
+      },
+      "noturno": {
+        "count": 11,
+        "soma": 44191,
+        "media": 4017.3636363636365
+      }
+    }
+  },
+  "debito_com_autenticacao": {
+    "ultimos_180_dias": {
+      "diurno": {
+        "count": 110,
+        "soma": 571226,
+        "media": 5192.963636363636
+      },
+      "final_semana": {
+        "count": 30,
+        "soma": 155856,
+        "media": 5195.2
+      },
+      "geral": {
+        "count": 122,
+        "soma": 621749,
+        "media": 5096.303278688524
+      },
+      "noturno": {
+        "count": 39,
+        "soma": 191704,
+        "media": 4915.48717948718
+      }
+    },
+    "ultimos_270_dias": {
+      "diurno": {
+        "count": 110,
+        "soma": 571226,
+        "media": 5192.963636363636
+      },
+      "final_semana": {
+        "count": 30,
+        "soma": 155856,
+        "media": 5195.2
+      },
+      "geral": {
+        "count": 122,
+        "soma": 621749,
+        "media": 5096.303278688524
+      },
+      "noturno": {
+        "count": 39,
+        "soma": 191704,
+        "media": 4915.48717948718
+      }
+    },
+    "ultimos_30_dias": {
+      "diurno": {
+        "count": 66,
+        "soma": 348204,
+        "media": 5275.818181818182
+      },
+      "final_semana": {
+        "count": 18,
+        "soma": 89915,
+        "media": 4995.277777777777
+      },
+      "geral": {
+        "count": 73,
+        "soma": 378021,
+        "media": 5178.369863013699
+      },
+      "noturno": {
+        "count": 22,
+        "soma": 100657,
+        "media": 4575.318181818182
+      }
+    },
+    "ultimos_365_dias": {
+      "diurno": {
+        "count": 110,
+        "soma": 571226,
+        "media": 5192.963636363636
+      },
+      "final_semana": {
+        "count": 30,
+        "soma": 155856,
+        "media": 5195.2
+      },
+      "geral": {
+        "count": 122,
+        "soma": 621749,
+        "media": 5096.303278688524
+      },
+      "noturno": {
+        "count": 39,
+        "soma": 191704,
+        "media": 4915.48717948718
+      }
+    },
+    "ultimos_7_dias": {
+      "diurno": {
+        "count": 13,
+        "soma": 70491,
+        "media": 5422.384615384615
+      },
+      "final_semana": {
+        "count": 8,
+        "soma": 31881,
+        "media": 3985.125
+      },
+      "geral": {
+        "count": 17,
+        "soma": 91444,
+        "media": 5379.058823529412
+      },
+      "noturno": {
+        "count": 7,
+        "soma": 31313,
+        "media": 4473.285714285715
+      }
+    },
+    "ultimos_90_dias": {
+      "diurno": {
+        "count": 110,
+        "soma": 571226,
+        "media": 5192.963636363636
+      },
+      "final_semana": {
+        "count": 30,
+        "soma": 155856,
+        "media": 5195.2
+      },
+      "geral": {
+        "count": 122,
+        "soma": 621749,
+        "media": 5096.303278688524
+      },
+      "noturno": {
+        "count": 39,
+        "soma": 191704,
+        "media": 4915.48717948718
+      }
+    }
+  },
+  "debito_sem_autenticacao": {
+    "ultimos_180_dias": {
+      "diurno": {
+        "count": 27,
+        "soma": 130501,
+        "media": 4833.37037037037
+      },
+      "final_semana": {
+        "count": 7,
+        "soma": 32953,
+        "media": 4707.571428571428
+      },
+      "geral": {
+        "count": 30,
+        "soma": 150647,
+        "media": 5021.566666666667
+      },
+      "noturno": {
+        "count": 7,
+        "soma": 37602,
+        "media": 5371.714285714285
+      }
+    },
+    "ultimos_270_dias": {
+      "diurno": {
+        "count": 27,
+        "soma": 130501,
+        "media": 4833.37037037037
+      },
+      "final_semana": {
+        "count": 7,
+        "soma": 32953,
+        "media": 4707.571428571428
+      },
+      "geral": {
+        "count": 30,
+        "soma": 150647,
+        "media": 5021.566666666667
+      },
+      "noturno": {
+        "count": 7,
+        "soma": 37602,
+        "media": 5371.714285714285
+      }
+    },
+    "ultimos_30_dias": {
+      "diurno": {
+        "count": 17,
+        "soma": 80031,
+        "media": 4707.705882352941
+      },
+      "final_semana": {
+        "count": 5,
+        "soma": 29765,
+        "media": 5953.0
+      },
+      "geral": {
+        "count": 18,
+        "soma": 86246,
+        "media": 4791.444444444444
+      },
+      "noturno": {
+        "count": 4,
+        "soma": 17559,
+        "media": 4389.75
+      }
+    },
+    "ultimos_365_dias": {
+      "diurno": {
+        "count": 27,
+        "soma": 130501,
+        "media": 4833.37037037037
+      },
+      "final_semana": {
+        "count": 7,
+        "soma": 32953,
+        "media": 4707.571428571428
+      },
+      "geral": {
+        "count": 30,
+        "soma": 150647,
+        "media": 5021.566666666667
+      },
+      "noturno": {
+        "count": 7,
+        "soma": 37602,
+        "media": 5371.714285714285
+      }
+    },
+    "ultimos_7_dias": {
+      "diurno": {
+        "count": 4,
+        "soma": 19716,
+        "media": 4929.0
+      },
+      "final_semana": {},
+      "geral": {
+        "count": 4,
+        "soma": 19716,
+        "media": 4929.0
+      },
+      "noturno": {
+        "count": 1,
+        "soma": 2381,
+        "media": 2381.0
+      }
+    },
+    "ultimos_90_dias": {
+      "diurno": {
+        "count": 27,
+        "soma": 130501,
+        "media": 4833.37037037037
+      },
+      "final_semana": {
+        "count": 7,
+        "soma": 32953,
+        "media": 4707.571428571428
+      },
+      "geral": {
+        "count": 30,
+        "soma": 150647,
+        "media": 5021.566666666667
+      },
+      "noturno": {
+        "count": 7,
+        "soma": 37602,
+        "media": 5371.714285714285
+      }
+    }
+  },
+  "geral": {
+    "ultimos_180_dias": {
+      "diurno": {
+        "count": 175,
+        "soma": 864420,
+        "media": 4939.542857142857
+      },
+      "final_semana": {
+        "count": 46,
+        "soma": 216059,
+        "media": 4696.934782608696
+      },
+      "geral": {
+        "count": 191,
+        "soma": 938639,
+        "media": 4914.340314136126
+      },
+      "noturno": {
+        "count": 57,
+        "soma": 273497,
+        "media": 4798.19298245614
+      }
+    },
+    "ultimos_270_dias": {
+      "diurno": {
+        "count": 175,
+        "soma": 864420,
+        "media": 4939.542857142857
+      },
+      "final_semana": {
+        "count": 46,
+        "soma": 216059,
+        "media": 4696.934782608696
+      },
+      "geral": {
+        "count": 191,
+        "soma": 938639,
+        "media": 4914.340314136126
+      },
+      "noturno": {
+        "count": 57,
+        "soma": 273497,
+        "media": 4798.19298245614
+      }
+    },
+    "ultimos_30_dias": {
+      "diurno": {
+        "count": 108,
+        "soma": 528905,
+        "media": 4897.268518518518
+      },
+      "final_semana": {
+        "count": 28,
+        "soma": 128343,
+        "media": 4583.678571428572
+      },
+      "geral": {
+        "count": 117,
+        "soma": 568487,
+        "media": 4858.863247863248
+      },
+      "noturno": {
+        "count": 33,
+        "soma": 148035,
+        "media": 4485.909090909091
+      }
+    },
+    "ultimos_365_dias": {
+      "diurno": {
+        "count": 175,
+        "soma": 864420,
+        "media": 4939.542857142857
+      },
+      "final_semana": {
+        "count": 46,
+        "soma": 216059,
+        "media": 4696.934782608696
+      },
+      "geral": {
+        "count": 191,
+        "soma": 938639,
+        "media": 4914.340314136126
+      },
+      "noturno": {
+        "count": 57,
+        "soma": 273497,
+        "media": 4798.19298245614
+      }
+    },
+    "ultimos_7_dias": {
+      "diurno": {
+        "count": 25,
+        "soma": 123934,
+        "media": 4957.36
+      },
+      "final_semana": {
+        "count": 10,
+        "soma": 36371,
+        "media": 3637.1
+      },
+      "geral": {
+        "count": 29,
+        "soma": 144887,
+        "media": 4996.103448275862
+      },
+      "noturno": {
+        "count": 10,
+        "soma": 42246,
+        "media": 4224.6
+      }
+    },
+    "ultimos_90_dias": {
+      "diurno": {
+        "count": 175,
+        "soma": 864420,
+        "media": 4939.542857142857
+      },
+      "final_semana": {
+        "count": 46,
+        "soma": 216059,
+        "media": 4696.934782608696
+      },
+      "geral": {
+        "count": 191,
+        "soma": 938639,
+        "media": 4914.340314136126
+      },
+      "noturno": {
+        "count": 57,
+        "soma": 273497,
+        "media": 4798.19298245614
+      }
+    }
+  }
+}

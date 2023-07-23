@@ -14,7 +14,9 @@ from pyspark.sql import DataFrame
 
 
 class DimensionsFactory:
-    def create_columns(self, df: DataFrame, columns, vision: str) -> DataFrame:
+    def create_columns(
+        self, df: DataFrame, columns, vision: str
+    ) -> DataFrame:
         columns.update({"visao": {vision: "placeholder"}})
         return reduce(
             lambda acc_df, column: acc_df.withColumn(

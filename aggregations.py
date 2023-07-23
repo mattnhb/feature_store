@@ -57,7 +57,9 @@ class DataContractParser:
             .get("general", {})
             .get(VISION, {}),
         )
-        df = df.withColumn("anomesdia", F.date_format(F.current_date(), "yyyy-MM-dd"))
+        df = df.withColumn(
+            "anomesdia", F.date_format(F.current_date(), "yyyy-MM-dd")
+        )
         df.show(truncate=False)
 
         DataWriter.save(df, writing_details=self.__content.get("writing"))
@@ -65,4 +67,3 @@ class DataContractParser:
 
 if __name__ == "__main__":
     DataContractParser().apply_aggregations()
-
