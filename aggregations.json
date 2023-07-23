@@ -1,0 +1,75 @@
+{
+  "feature_store": "debito",
+  "reading": {
+    "path": "S3",
+    "format": "parquet"
+  },
+  "aggregations": {
+    "general": {
+      "cliente": {
+        "grouped_by": ["client_id"],
+        "dimensions": {
+          "subproduto": [
+            {
+              "debito_com_autenticacao": "subproduto"
+            },
+            {
+              "debito_sem_autenticacao": "subproduto"
+            },
+            {
+              "contactless_sem_autentificacao": "subproduto"
+            },
+            {
+              "geral": "subproduto"
+            }
+          ],
+          "janela": [
+            {
+              "ultimos_7_dias": "data_transacao"
+            },
+            {
+              "ultimos_30_dias": "data_transacao"
+            },
+            {
+              "ultimos_90_dias": "data_transacao"
+            },
+            {
+              "ultimos_180_dias": "data_transacao"
+            },
+            {
+              "ultimos_270_dias": "data_transacao"
+            },
+            {
+              "ultimos_365_dias": "data_transacao"
+            }
+          ],
+          "periodo": [
+            {
+              "diurno": "data_transacao"
+            },
+            {
+              "noturno": "data_transacao"
+            },
+            {
+              "final_semana": "data_transacao"
+            },
+            {
+              "geral": "data_transacao"
+            }
+          ]
+        },
+        "metrics": [
+          {
+            "soma": "valor"
+          },
+          {
+            "media": "valor"
+          },
+          {
+            "maximo": "valor"
+          }
+        ]
+      }
+    }
+  }
+}

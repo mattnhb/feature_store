@@ -2,9 +2,7 @@
   "feature_store": "fakedata",
   "sanitization": {
     "remove_nulls": [
-      "client_id",
-      "status_transacao",
-      "valor"
+      "client_id"
     ],
     "include_only": {
       "status_transacao": [
@@ -17,11 +15,13 @@
   },
   "transformations": {
     "rename": {
-      "destino": "estabelecimento",
-      "valor": "value"
+      "destino": "estabelecimento"
     },
     "cast": {
-      "status_transacao": "string"
+      "status_transacao": "string",
+      "ano": "string",
+      "mes": "string",
+      "dia": "string"
     },
     "extract_dayofweek": {
       "data_transacao": "dia_semana"
@@ -30,11 +30,8 @@
       "subproduto": {
         "debito_com_autenticacao": "produto_origem in ('CARDLESS', 'CARDLESS', 'COMPRA ECOMMERCE 3DS', 'COMPRA INTERNACIONAL CHIP E SENHA', 'COMPRA INTERNACIONAL CHIP E SENHA OFFLINE', 'COMPRA INTERNACIONAL CONTACTLESS COM SENHA', 'COMPRA INTERNACIONAL TOKEN SEM SENHA', 'COMPRA NACIONAL COM CHIP E SENHA', 'COMPRA NACIONAL CONTACTLESS COM SENHA', 'COMPRA NACIONAL CONTACTLESS INSS COM SENHA', 'COMPRA NACIONAL INSS COM CHIP E SENHA', 'COMPRA NACIONAL TOKEN COM SENHA', 'COMPRA NACIONAL TOKEN SEM SENHA', 'SAQUE INTERNACIONAL')",
         "debito_sem_autenticacao": "produto_origem in ('M4M NACIONAL', 'DEBITO SEM SENHA INTERNACIONAL', 'DEBITO SEM SENHA NACIONAL', 'M4M INTERNACIONAL')",
-        "contactless_sem_autentificacao": "produto_origem in ('COMPRA INTERNACIONAL CONTACTLESS SEM SENHA', 'COMPRA NACIONAL CONTACTLESS INSS SEM SENHA', 'COMPRA NACIONAL CONTACTLESS SEM SENHA', 'MTT RETENTATIVA')"
-      },
-      "estabelecimento": {
-        "pedrinho": "estabelecimento == 24234234",
-        "else": "uepa"
+        "contactless_sem_autentificacao": "produto_origem in ('COMPRA INTERNACIONAL CONTACTLESS SEM SENHA', 'COMPRA NACIONAL CONTACTLESS INSS SEM SENHA', 'COMPRA NACIONAL CONTACTLESS SEM SENHA', 'MTT RETENTATIVA')",
+        "else": "erro"
       },
       "nome_dia": {
         "else": "erro",
@@ -51,10 +48,9 @@
   "extra_transformations": true,
   "writing": {
     "partitions": [
-      "subproduto",
-      "ano",
-      "mes",
-      "dia"
+      "anomesdia",
+      "subproduto"
+
     ],
     "saving_path": "S3",
     "saving_format": "parquet",

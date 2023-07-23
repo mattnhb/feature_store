@@ -1,4 +1,5 @@
 import json
+from functools import reduce
 from importlib import import_module
 from pprint import pprint
 from typing import Dict, Any
@@ -12,7 +13,7 @@ from fakedata.loader.from_origin import FakeData
 from pix.loader.from_origin import PixOriginData
 from tef.loader.from_origin import TefOriginData
 from services import get_logger
-
+import pyspark.sql.functions as F
 from pyspark.sql import DataFrame
 
 POSSIBILITIES: Dict[str, Any] = {
@@ -32,17 +33,28 @@ class DataContractParser:
         # pprint(self.__content)
 
     def extract(self) -> DataFrame:
-        return self.apply_extra_transformations(
-            self.apply_transformation(
-                self.apply_sanitization(
-                    POSSIBILITIES.get(
-                        self.__content["feature_store"]
-                    )().load_data()
+        return self.create_single_date_partition(
+            self.apply_extra_transformations(
+                self.apply_transformation(
+                    self.apply_sanitization(
+                        POSSIBILITIES.get(
+                            self.__content["feature_store"]
+                        )().load_data()
+                    )
                 )
             )
         )
 
-    def apply_transformation(self, df: DataFrame):
+    @staticmethod
+    def create_single_date_partition(df: DataFrame) -> DataFrame:
+        return reduce(
+            lambda _df, col: _df.withColumn(col, F.lpad(col, 2, "0")),
+            {"mes", "dia"},
+            df,
+        ).withColumn("anomesdia", F.concat_ws("-", "ano", "mes", "dia"))
+
+    def apply_transformation(self, df: DataFrame) -> DataFrame:
+        print(f"{df.count()=}")
         logger.info(
             "Applying transformations %s",
             self.__content.get("transformations", {}),
@@ -54,7 +66,8 @@ class DataContractParser:
             transformation_details=self.__content.get("transformations", {}),
         )
 
-    def apply_sanitization(self, df: DataFrame):
+    def apply_sanitization(self, df: DataFrame) -> DataFrame:
+        print(f"{df.count()=}")
         logger.info(
             "Applying sanitization %s", self.__content.get("sanitization", {})
         )
@@ -77,4 +90,5 @@ class DataContractParser:
         df = self.extract()
         df.show(truncate=False)
         df.printSchema()
+        print(df.count())
         # DataWriter.save(df, writing_details=self.__content.get("writing"))

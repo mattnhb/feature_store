@@ -17,9 +17,9 @@ fake = Faker()
 Faker.seed(0)
 
 valores_datas: List[datetime] = [
-    fake.date_time_between(start_date="-2y") for _ in range(20)
+    fake.date_time_between(start_date="-1y") for _ in range(30000)
 ]
-valores_client_id = [fake.uuid4() for _ in range(20)] + [None] * 20
+valores_client_id = [fake.uuid4() for _ in range(20)]
 
 valores_produto_origem: List[str] = [
     "CARDLESS",
@@ -52,8 +52,6 @@ valores_status_transacao: List[str] = [
     "10",
     "11",
     "85",
-    "69",
-    "420",
 ]
 
 
@@ -70,7 +68,7 @@ class FakeData(BaseOriginData):
                     produto_origem=choice(valores_produto_origem),
                     destino=choice(valores_destino),
                     valor=fake.pyint(),
-                    status_transacao=int(choice(valores_status_transacao)),
+                    status_transacao=choice(valores_status_transacao),
                 )
                 for date in valores_datas
             ]
