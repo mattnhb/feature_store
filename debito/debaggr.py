@@ -35,12 +35,16 @@ import pyspark.sql.functions as F
 VISAO = {
     "client_id": "cliente",
     "estabelecimento": "estabelecimento",
-    "client_id-estabelecimento": "cliente_estabelecimento"
+    "client_id-estabelecimento": "cliente_estabelecimento",
 }
 
 
-def get_vision_name(grouped_columns):
-    return VISAO.get("-".join(grouped_columns)) if len(grouped_columns) > 1 else VISAO.get(*grouped_columns)
+def _get_vision_name(grouped_columns):
+    return (
+        VISAO.get("-".join(grouped_columns))
+        if len(grouped_columns) > 1
+        else VISAO.get(*grouped_columns)
+    )
 
 
 class DebitoAggregate:
@@ -54,13 +58,19 @@ class DebitoAggregate:
                 )
                 .groupBy(*vision.get("grouped_by"))
                 .agg(*mf.create_expressions(vision.get("metrics", {})))
-                .transform(lambda _df: dimf.create_columns(_df, combination, get_vision_name(vision.get("grouped_by"))))
+                .transform(
+                    lambda _df: dimf.create_columns(
+                        _df,
+                        combination,
+                        _get_vision_name(vision.get("grouped_by")),
+                    )
+                )
                 for combination in [
-                dict(zip(dimensions.keys(), combination))
-                for combination in product(*list(dimensions.values()))
-            ]
+                    dict(zip(dimensions.keys(), combination))
+                    for combination in product(*list(dimensions.values()))
+                ]
             ]
         )
-        print(get_vision_name(vision.get("grouped_by")))
+        print(_get_vision_name(vision.get("grouped_by")))
         print(df.count())
         return df

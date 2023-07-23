@@ -7,7 +7,7 @@
   "aggregations": {
     "general": {
       "cliente": {
-        "grouped_by": ["estabelecimento"],
+        "grouped_by": ["client_id"],
         "dimensions": {
           "subproduto": [
             {
@@ -74,5 +74,15 @@
         ]
       }
     }
+  },
+  "writing": {
+    "partitions": [
+      "visao",
+      "anomesdia",
+      "client_id"
+    ],
+    "saving_path": "AGGREGATED",
+    "saving_format": "parquet",
+    "saving_mode": "overwrite"
   }
 }

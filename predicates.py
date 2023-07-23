@@ -27,7 +27,6 @@ class PredicateFactory:
             "diurno": ~(F.hour(value) >= 22) | (F.hour(value) < 6),
             "geral": geral(),
         }
-        print(_predicates.get(key, geral()))
         return _predicates.get(key, geral())
 
     # {'janela': {'ultimos_180_dias': 'data_transacao'},
@@ -35,7 +34,6 @@ class PredicateFactory:
     #  'subproduto': {'geral': 'subproduto'}},
 
     def dispatcher(self, relations):
-        print(f"Creating predicate for {relations}")
         _predicates = {
             "subproduto": self.field_equals,
             "janela": self.field_last_n_days,
