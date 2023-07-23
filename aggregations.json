@@ -7,7 +7,7 @@
   "aggregations": {
     "general": {
       "cliente": {
-        "grouped_by": ["client_id"],
+        "grouped_by": ["estabelecimento"],
         "dimensions": {
           "subproduto": [
             {
@@ -67,6 +67,9 @@
           },
           {
             "maximo": "valor"
+          },
+          {
+            "count": "valor"
           }
         ]
       }

@@ -15,7 +15,7 @@ spark = SparkSession.builder.appName("Create Aggregations").getOrCreate()
 # df = spark.read.format("parquet").load("S3")
 # df.show(truncate=False)
 
-DAYS_AGO = 365
+DAYS_AGO = 50
 VISION = "cliente"
 
 POSSIBILITIES: Dict[str, Any] = {
@@ -73,3 +73,6 @@ if __name__ == "__main__":
         # .distinct()
         .show(truncate=False)
     )
+    # df.select("subproduto", "janela", "periodo").distinct().show(
+    #     truncate=False, n=1000
+    # )

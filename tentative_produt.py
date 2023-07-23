@@ -34,4 +34,5 @@ combinations = [
 ]
 
 # Print a short example of the output
+pprint(len(combinations))
 pprint(combinations)  # Print the first combination

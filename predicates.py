@@ -19,6 +19,17 @@ class PredicateFactory:
             int(re.match(r"^ultimos_(\d+)_dias$", key)[1])
         )
 
+    @staticmethod
+    def field_date_in_condition(key: str, value: str):
+        _predicates = {
+            "final_semana": F.dayofweek(value).isin([1, 7]),
+            "noturno": (F.hour(value) >= 22) | (F.hour(value) < 6),
+            "diurno": ~(F.hour(value) >= 22) | (F.hour(value) < 6),
+            "geral": geral(),
+        }
+        print(_predicates.get(key, geral()))
+        return _predicates.get(key, geral())
+
     # {'janela': {'ultimos_180_dias': 'data_transacao'},
     #  'periodo': {'diurno': 'data_transacao'},
     #  'subproduto': {'geral': 'subproduto'}},
@@ -28,7 +39,7 @@ class PredicateFactory:
         _predicates = {
             "subproduto": self.field_equals,
             "janela": self.field_last_n_days,
-            "periodo": geral,
+            "periodo": self.field_date_in_condition,
         }
         return (
             (_predicates.get(relation)(key, value))

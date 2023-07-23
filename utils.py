@@ -62,14 +62,6 @@ class __Sanitization:
     def include_only(
         df: DataFrame, to_include: Dict[str, Any], *args, **kwargs
     ) -> DataFrame:
-        print(
-            list(
-                (
-                    F.col(field).isin(to_include.get(field))
-                    for field in to_include
-                )
-            )
-        )
         return _filter_reducer(
             df,
             operator=and_,
