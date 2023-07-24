@@ -46,6 +46,13 @@ class DataContractParser:
             )
         )
 
+    @staticmethod
+    def __add_processing_date_column(df: DataFrame) -> DataFrame:
+        return df.withColumn(
+            "data_processamento",
+            F.date_format(F.current_date(), "yyyy-MM-dd"),
+        )
+
     def apply_aggregations(self) -> DataFrame:
         # pprint(self.__content.get("aggregations", {}).get("general", {}))
 
@@ -57,11 +64,10 @@ class DataContractParser:
             .get("general", {})
             .get(VISION, {}),
         )
-        df = df.withColumn(
-            "anomesdia", F.date_format(F.current_date(), "yyyy-MM-dd")
-        )
-        df.show(truncate=False)
 
+        df = self.__add_processing_date_column(df)
+        df.show(truncate=False)
+        print(df.columns)
         DataWriter.save(df, writing_details=self.__content.get("writing"))
 
 

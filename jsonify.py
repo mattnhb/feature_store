@@ -57,22 +57,49 @@ spark = SparkSession.builder.appName(
 ).getOrCreate()
 
 dx = spark.read.format("parquet").load("AGGREGATED")
-
+print(f"{dx.columns=}")
+print(f"{len(dx.columns)=}")
 dx = dx.withColumn(
     "_pivot",
     F.concat_ws("-", "subproduto", "janela", "periodo"),
 )
-dx.show(truncate=False)
+print(f"{dx.columns=}")
+print(f"{len(dx.columns)=}")
+# dx.show(truncate=False)
 dx = (
     dx.groupBy("client_id")
     .pivot("_pivot")
     .agg(
         F.first("count").alias("count"),
-        F.first("soma").alias("soma"),
-        F.first("media").alias("media"),
+        # F.first("soma").alias("soma"),
+        # F.first("media").alias("media"),
+        # F.first("maximo").alias("maximo"),
+        # F.first("minimo").alias("minimo"),
+        F.first("desviopadrao").alias("desviopadrao"),
+
+        # F.first("mediana").alias("mediana"),
+
+        # F.first("q1").alias("q1"),
+        # F.first("q2").alias("q2"),
+        # F.first("q3").alias("q3"),
+        # F.first("q4").alias("q4"),
+        #
+        # F.first("d1").alias("d1"),
+        # F.first("d2").alias("d2"),
+        # F.first("d3").alias("d3"),
+        # F.first("d4").alias("d4"),
+        # F.first("d5").alias("d5"),
+        # F.first("d6").alias("d6"),
+        # F.first("d7").alias("d7"),
+        # F.first("d8").alias("d8"),
+        # F.first("d9").alias("d9"),
+        # F.first("d10").alias("d10"),
+
     )
 )
-dx.show(truncate=False)
+# dx.show(truncate=False)
+print(f"{dx.columns=}")
+print(f"{len(dx.columns)=}")
 colunas = list(filter(lambda coluna: coluna not in {"client_id"}, dx.columns))
 dx = reduce(
     lambda df, coluna: df.withColumnRenamed(
@@ -86,9 +113,9 @@ rel_col = {
     for coluna in ["-".join(coluna.rsplit("_", 1)) for coluna in colunas]
 }
 nested = create_nested_dict(rel_col)
-pprint(rel_col)
-pprint(nested)
-dx.show(truncate=False)
+# pprint(rel_col)
+# pprint(nested)
+# dx.show(truncate=False)
 
 
 dx = dx.withColumn("metricas", nested_to_json(nested))

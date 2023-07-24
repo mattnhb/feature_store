@@ -1,533 +1,771 @@
 {
   "contactless_sem_autentificacao": {
     "ultimos_180_dias": {
+      "dia_17_24": {
+        "count": 15,
+        "desviopadrao": 2886.515219825753
+      },
+      "dia_1_8": {
+        "count": 11,
+        "desviopadrao": 2862.9588699296905
+      },
+      "dia_25_31": {
+        "count": 2,
+        "desviopadrao": 2070.408655314211
+      },
+      "dia_9_16": {
+        "count": 10,
+        "desviopadrao": 1601.0407066793912
+      },
       "diurno": {
-        "count": 38,
-        "soma": 162693,
-        "media": 4281.394736842105
+        "count": 37,
+        "desviopadrao": 2558.7034500592968
       },
       "final_semana": {
-        "count": 9,
-        "soma": 27250,
-        "media": 3027.777777777778
+        "count": 8,
+        "desviopadrao": 2351.000877286098
       },
       "geral": {
-        "count": 39,
-        "soma": 166243,
-        "media": 4262.641025641025
+        "count": 38,
+        "desviopadrao": 2527.5772200131587
       },
       "noturno": {
-        "count": 11,
-        "soma": 44191,
-        "media": 4017.3636363636365
+        "count": 10,
+        "desviopadrao": 1760.1145038510042
       }
     },
     "ultimos_270_dias": {
+      "dia_17_24": {
+        "count": 15,
+        "desviopadrao": 2886.515219825753
+      },
+      "dia_1_8": {
+        "count": 11,
+        "desviopadrao": 2862.9588699296905
+      },
+      "dia_25_31": {
+        "count": 2,
+        "desviopadrao": 2070.408655314211
+      },
+      "dia_9_16": {
+        "count": 10,
+        "desviopadrao": 1601.0407066793912
+      },
       "diurno": {
-        "count": 38,
-        "soma": 162693,
-        "media": 4281.394736842105
+        "count": 37,
+        "desviopadrao": 2558.7034500592968
       },
       "final_semana": {
-        "count": 9,
-        "soma": 27250,
-        "media": 3027.777777777778
+        "count": 8,
+        "desviopadrao": 2351.000877286098
       },
       "geral": {
-        "count": 39,
-        "soma": 166243,
-        "media": 4262.641025641025
+        "count": 38,
+        "desviopadrao": 2527.5772200131587
       },
       "noturno": {
-        "count": 11,
-        "soma": 44191,
-        "media": 4017.3636363636365
+        "count": 10,
+        "desviopadrao": 1760.1145038510042
       }
     },
     "ultimos_30_dias": {
+      "dia_17_24": {
+        "count": 7,
+        "desviopadrao": 2653.775352031068
+      },
+      "dia_1_8": {
+        "count": 8,
+        "desviopadrao": 2038.9462921182737
+      },
+      "dia_25_31": {
+        "count": 2,
+        "desviopadrao": 2070.408655314211
+      },
+      "dia_9_16": {
+        "count": 7,
+        "desviopadrao": 1440.4798968862194
+      },
       "diurno": {
-        "count": 25,
-        "soma": 100670,
-        "media": 4026.8
+        "count": 23,
+        "desviopadrao": 2141.3220953900263
       },
       "final_semana": {
         "count": 5,
-        "soma": 8663,
-        "media": 1732.6
+        "desviopadrao": 723.2684840361842
       },
       "geral": {
-        "count": 26,
-        "soma": 104220,
-        "media": 4008.4615384615386
+        "count": 24,
+        "desviopadrao": 2096.6908071004914
       },
       "noturno": {
         "count": 7,
-        "soma": 29819,
-        "media": 4259.857142857143
+        "desviopadrao": 1891.864726363157
       }
     },
     "ultimos_365_dias": {
+      "dia_17_24": {
+        "count": 15,
+        "desviopadrao": 2886.515219825753
+      },
+      "dia_1_8": {
+        "count": 11,
+        "desviopadrao": 2862.9588699296905
+      },
+      "dia_25_31": {
+        "count": 2,
+        "desviopadrao": 2070.408655314211
+      },
+      "dia_9_16": {
+        "count": 10,
+        "desviopadrao": 1601.0407066793912
+      },
       "diurno": {
-        "count": 38,
-        "soma": 162693,
-        "media": 4281.394736842105
+        "count": 37,
+        "desviopadrao": 2558.7034500592968
       },
       "final_semana": {
-        "count": 9,
-        "soma": 27250,
-        "media": 3027.777777777778
+        "count": 8,
+        "desviopadrao": 2351.000877286098
       },
       "geral": {
-        "count": 39,
-        "soma": 166243,
-        "media": 4262.641025641025
+        "count": 38,
+        "desviopadrao": 2527.5772200131587
       },
       "noturno": {
-        "count": 11,
-        "soma": 44191,
-        "media": 4017.3636363636365
+        "count": 10,
+        "desviopadrao": 1760.1145038510042
       }
     },
     "ultimos_7_dias": {
+      "dia_17_24": {
+        "count": 7,
+        "desviopadrao": 2653.775352031068
+      },
       "diurno": {
-        "count": 8,
-        "soma": 33727,
-        "media": 4215.875
+        "count": 7,
+        "desviopadrao": 2653.775352031068
       },
       "final_semana": {
-        "count": 2,
-        "soma": 4490,
-        "media": 2245.0
+        "count": 1
       },
       "geral": {
-        "count": 8,
-        "soma": 33727,
-        "media": 4215.875
+        "count": 7,
+        "desviopadrao": 2653.775352031068
       },
       "noturno": {
-        "count": 2,
-        "soma": 8552,
-        "media": 4276.0
+        "count": 1
       }
     },
     "ultimos_90_dias": {
+      "dia_17_24": {
+        "count": 15,
+        "desviopadrao": 2886.515219825753
+      },
+      "dia_1_8": {
+        "count": 11,
+        "desviopadrao": 2862.9588699296905
+      },
+      "dia_25_31": {
+        "count": 2,
+        "desviopadrao": 2070.408655314211
+      },
+      "dia_9_16": {
+        "count": 10,
+        "desviopadrao": 1601.0407066793912
+      },
       "diurno": {
-        "count": 38,
-        "soma": 162693,
-        "media": 4281.394736842105
+        "count": 37,
+        "desviopadrao": 2558.7034500592968
       },
       "final_semana": {
-        "count": 9,
-        "soma": 27250,
-        "media": 3027.777777777778
+        "count": 8,
+        "desviopadrao": 2351.000877286098
       },
       "geral": {
-        "count": 39,
-        "soma": 166243,
-        "media": 4262.641025641025
+        "count": 38,
+        "desviopadrao": 2527.5772200131587
       },
       "noturno": {
-        "count": 11,
-        "soma": 44191,
-        "media": 4017.3636363636365
+        "count": 10,
+        "desviopadrao": 1760.1145038510042
       }
     }
   },
   "debito_com_autenticacao": {
     "ultimos_180_dias": {
+      "dia_17_24": {
+        "count": 31,
+        "desviopadrao": 2700.9986970175164
+      },
+      "dia_1_8": {
+        "count": 38,
+        "desviopadrao": 2817.1885458710776
+      },
+      "dia_25_31": {
+        "count": 12,
+        "desviopadrao": 3307.335451368486
+      },
+      "dia_9_16": {
+        "count": 40,
+        "desviopadrao": 2998.857942339606
+      },
       "diurno": {
-        "count": 110,
-        "soma": 571226,
-        "media": 5192.963636363636
+        "count": 109,
+        "desviopadrao": 2878.7637699223133
       },
       "final_semana": {
-        "count": 30,
-        "soma": 155856,
-        "media": 5195.2
+        "count": 29,
+        "desviopadrao": 3181.995848334459
       },
       "geral": {
-        "count": 122,
-        "soma": 621749,
-        "media": 5096.303278688524
+        "count": 121,
+        "desviopadrao": 2917.284867511119
       },
       "noturno": {
         "count": 39,
-        "soma": 191704,
-        "media": 4915.48717948718
+        "desviopadrao": 3239.4990830438333
       }
     },
     "ultimos_270_dias": {
+      "dia_17_24": {
+        "count": 31,
+        "desviopadrao": 2700.9986970175164
+      },
+      "dia_1_8": {
+        "count": 38,
+        "desviopadrao": 2817.1885458710776
+      },
+      "dia_25_31": {
+        "count": 12,
+        "desviopadrao": 3307.335451368486
+      },
+      "dia_9_16": {
+        "count": 40,
+        "desviopadrao": 2998.857942339606
+      },
       "diurno": {
-        "count": 110,
-        "soma": 571226,
-        "media": 5192.963636363636
+        "count": 109,
+        "desviopadrao": 2878.7637699223133
       },
       "final_semana": {
-        "count": 30,
-        "soma": 155856,
-        "media": 5195.2
+        "count": 29,
+        "desviopadrao": 3181.995848334459
       },
       "geral": {
-        "count": 122,
-        "soma": 621749,
-        "media": 5096.303278688524
+        "count": 121,
+        "desviopadrao": 2917.284867511119
       },
       "noturno": {
         "count": 39,
-        "soma": 191704,
-        "media": 4915.48717948718
+        "desviopadrao": 3239.4990830438333
       }
     },
     "ultimos_30_dias": {
+      "dia_17_24": {
+        "count": 12,
+        "desviopadrao": 1643.0998328178543
+      },
+      "dia_1_8": {
+        "count": 26,
+        "desviopadrao": 2677.7416443425145
+      },
+      "dia_25_31": {
+        "count": 12,
+        "desviopadrao": 3307.335451368486
+      },
+      "dia_9_16": {
+        "count": 20,
+        "desviopadrao": 2537.6922359124887
+      },
       "diurno": {
-        "count": 66,
-        "soma": 348204,
-        "media": 5275.818181818182
+        "count": 63,
+        "desviopadrao": 2642.5457502163868
       },
       "final_semana": {
         "count": 18,
-        "soma": 89915,
-        "media": 4995.277777777777
+        "desviopadrao": 3093.12609441447
       },
       "geral": {
-        "count": 73,
-        "soma": 378021,
-        "media": 5178.369863013699
+        "count": 70,
+        "desviopadrao": 2698.1908462245774
       },
       "noturno": {
-        "count": 22,
-        "soma": 100657,
-        "media": 4575.318181818182
+        "count": 21,
+        "desviopadrao": 3091.3491167942775
       }
     },
     "ultimos_365_dias": {
+      "dia_17_24": {
+        "count": 31,
+        "desviopadrao": 2700.9986970175164
+      },
+      "dia_1_8": {
+        "count": 38,
+        "desviopadrao": 2817.1885458710776
+      },
+      "dia_25_31": {
+        "count": 12,
+        "desviopadrao": 3307.335451368486
+      },
+      "dia_9_16": {
+        "count": 40,
+        "desviopadrao": 2998.857942339606
+      },
       "diurno": {
-        "count": 110,
-        "soma": 571226,
-        "media": 5192.963636363636
+        "count": 109,
+        "desviopadrao": 2878.7637699223133
       },
       "final_semana": {
-        "count": 30,
-        "soma": 155856,
-        "media": 5195.2
+        "count": 29,
+        "desviopadrao": 3181.995848334459
       },
       "geral": {
-        "count": 122,
-        "soma": 621749,
-        "media": 5096.303278688524
+        "count": 121,
+        "desviopadrao": 2917.284867511119
       },
       "noturno": {
         "count": 39,
-        "soma": 191704,
-        "media": 4915.48717948718
+        "desviopadrao": 3239.4990830438333
       }
     },
     "ultimos_7_dias": {
+      "dia_17_24": {
+        "count": 11,
+        "desviopadrao": 1702.6543555711637
+      },
       "diurno": {
-        "count": 13,
-        "soma": 70491,
-        "media": 5422.384615384615
+        "count": 8,
+        "desviopadrao": 1724.2303458976373
       },
       "final_semana": {
-        "count": 8,
-        "soma": 31881,
-        "media": 3985.125
+        "count": 2,
+        "desviopadrao": 266.5792565073284
       },
       "geral": {
-        "count": 17,
-        "soma": 91444,
-        "media": 5379.058823529412
+        "count": 11,
+        "desviopadrao": 1702.6543555711637
       },
       "noturno": {
-        "count": 7,
-        "soma": 31313,
-        "media": 4473.285714285715
+        "count": 3,
+        "desviopadrao": 1934.2472265285357
       }
     },
     "ultimos_90_dias": {
+      "dia_17_24": {
+        "count": 31,
+        "desviopadrao": 2700.9986970175164
+      },
+      "dia_1_8": {
+        "count": 38,
+        "desviopadrao": 2817.1885458710776
+      },
+      "dia_25_31": {
+        "count": 12,
+        "desviopadrao": 3307.335451368486
+      },
+      "dia_9_16": {
+        "count": 40,
+        "desviopadrao": 2998.857942339606
+      },
       "diurno": {
-        "count": 110,
-        "soma": 571226,
-        "media": 5192.963636363636
+        "count": 109,
+        "desviopadrao": 2878.7637699223133
       },
       "final_semana": {
-        "count": 30,
-        "soma": 155856,
-        "media": 5195.2
+        "count": 29,
+        "desviopadrao": 3181.995848334459
       },
       "geral": {
-        "count": 122,
-        "soma": 621749,
-        "media": 5096.303278688524
+        "count": 121,
+        "desviopadrao": 2917.284867511119
       },
       "noturno": {
         "count": 39,
-        "soma": 191704,
-        "media": 4915.48717948718
+        "desviopadrao": 3239.4990830438333
       }
     }
   },
   "debito_sem_autenticacao": {
     "ultimos_180_dias": {
+      "dia_17_24": {
+        "count": 6,
+        "desviopadrao": 2503.6649136815413
+      },
+      "dia_1_8": {
+        "count": 14,
+        "desviopadrao": 2053.8450900314156
+      },
+      "dia_25_31": {
+        "count": 3,
+        "desviopadrao": 4360.663290525116
+      },
+      "dia_9_16": {
+        "count": 7,
+        "desviopadrao": 3300.291083843248
+      },
       "diurno": {
         "count": 27,
-        "soma": 130501,
-        "media": 4833.37037037037
+        "desviopadrao": 2863.0116492434513
       },
       "final_semana": {
         "count": 7,
-        "soma": 32953,
-        "media": 4707.571428571428
+        "desviopadrao": 3794.366300062188
       },
       "geral": {
         "count": 30,
-        "soma": 150647,
-        "media": 5021.566666666667
+        "desviopadrao": 2779.0892291681034
       },
       "noturno": {
         "count": 7,
-        "soma": 37602,
-        "media": 5371.714285714285
+        "desviopadrao": 2122.169622052372
       }
     },
     "ultimos_270_dias": {
+      "dia_17_24": {
+        "count": 6,
+        "desviopadrao": 2503.6649136815413
+      },
+      "dia_1_8": {
+        "count": 14,
+        "desviopadrao": 2053.8450900314156
+      },
+      "dia_25_31": {
+        "count": 3,
+        "desviopadrao": 4360.663290525116
+      },
+      "dia_9_16": {
+        "count": 7,
+        "desviopadrao": 3300.291083843248
+      },
       "diurno": {
         "count": 27,
-        "soma": 130501,
-        "media": 4833.37037037037
+        "desviopadrao": 2863.0116492434513
       },
       "final_semana": {
         "count": 7,
-        "soma": 32953,
-        "media": 4707.571428571428
+        "desviopadrao": 3794.366300062188
       },
       "geral": {
         "count": 30,
-        "soma": 150647,
-        "media": 5021.566666666667
+        "desviopadrao": 2779.0892291681034
       },
       "noturno": {
         "count": 7,
-        "soma": 37602,
-        "media": 5371.714285714285
+        "desviopadrao": 2122.169622052372
       }
     },
     "ultimos_30_dias": {
+      "dia_17_24": {
+        "count": 4,
+        "desviopadrao": 2809.969750726865
+      },
+      "dia_1_8": {
+        "count": 6,
+        "desviopadrao": 2290.2718324833554
+      },
+      "dia_25_31": {
+        "count": 3,
+        "desviopadrao": 4360.663290525116
+      },
+      "dia_9_16": {
+        "count": 4,
+        "desviopadrao": 3824.012410631883
+      },
       "diurno": {
-        "count": 17,
-        "soma": 80031,
-        "media": 4707.705882352941
+        "count": 16,
+        "desviopadrao": 3007.960964258014
       },
       "final_semana": {
         "count": 5,
-        "soma": 29765,
-        "media": 5953.0
+        "desviopadrao": 3746.9659726237173
       },
       "geral": {
-        "count": 18,
-        "soma": 86246,
-        "media": 4791.444444444444
+        "count": 17,
+        "desviopadrao": 2934.019411048905
       },
       "noturno": {
         "count": 4,
-        "soma": 17559,
-        "media": 4389.75
+        "desviopadrao": 2353.405670512417
       }
     },
     "ultimos_365_dias": {
+      "dia_17_24": {
+        "count": 6,
+        "desviopadrao": 2503.6649136815413
+      },
+      "dia_1_8": {
+        "count": 14,
+        "desviopadrao": 2053.8450900314156
+      },
+      "dia_25_31": {
+        "count": 3,
+        "desviopadrao": 4360.663290525116
+      },
+      "dia_9_16": {
+        "count": 7,
+        "desviopadrao": 3300.291083843248
+      },
       "diurno": {
         "count": 27,
-        "soma": 130501,
-        "media": 4833.37037037037
+        "desviopadrao": 2863.0116492434513
       },
       "final_semana": {
         "count": 7,
-        "soma": 32953,
-        "media": 4707.571428571428
+        "desviopadrao": 3794.366300062188
       },
       "geral": {
         "count": 30,
-        "soma": 150647,
-        "media": 5021.566666666667
+        "desviopadrao": 2779.0892291681034
       },
       "noturno": {
         "count": 7,
-        "soma": 37602,
-        "media": 5371.714285714285
+        "desviopadrao": 2122.169622052372
       }
     },
     "ultimos_7_dias": {
+      "dia_17_24": {
+        "count": 4,
+        "desviopadrao": 2809.969750726865
+      },
       "diurno": {
         "count": 4,
-        "soma": 19716,
-        "media": 4929.0
+        "desviopadrao": 2809.969750726865
       },
       "final_semana": {},
       "geral": {
         "count": 4,
-        "soma": 19716,
-        "media": 4929.0
+        "desviopadrao": 2809.969750726865
       },
       "noturno": {
-        "count": 1,
-        "soma": 2381,
-        "media": 2381.0
+        "count": 1
       }
     },
     "ultimos_90_dias": {
+      "dia_17_24": {
+        "count": 6,
+        "desviopadrao": 2503.6649136815413
+      },
+      "dia_1_8": {
+        "count": 14,
+        "desviopadrao": 2053.8450900314156
+      },
+      "dia_25_31": {
+        "count": 3,
+        "desviopadrao": 4360.663290525116
+      },
+      "dia_9_16": {
+        "count": 7,
+        "desviopadrao": 3300.291083843248
+      },
       "diurno": {
         "count": 27,
-        "soma": 130501,
-        "media": 4833.37037037037
+        "desviopadrao": 2863.0116492434513
       },
       "final_semana": {
         "count": 7,
-        "soma": 32953,
-        "media": 4707.571428571428
+        "desviopadrao": 3794.366300062188
       },
       "geral": {
         "count": 30,
-        "soma": 150647,
-        "media": 5021.566666666667
+        "desviopadrao": 2779.0892291681034
       },
       "noturno": {
         "count": 7,
-        "soma": 37602,
-        "media": 5371.714285714285
+        "desviopadrao": 2122.169622052372
       }
     }
   },
   "geral": {
     "ultimos_180_dias": {
+      "dia_17_24": {
+        "count": 52,
+        "desviopadrao": 2718.7858374399875
+      },
+      "dia_1_8": {
+        "count": 63,
+        "desviopadrao": 2723.6717850782866
+      },
+      "dia_25_31": {
+        "count": 17,
+        "desviopadrao": 3276.190849949697
+      },
+      "dia_9_16": {
+        "count": 57,
+        "desviopadrao": 2813.4029542455155
+      },
       "diurno": {
-        "count": 175,
-        "soma": 864420,
-        "media": 4939.542857142857
+        "count": 173,
+        "desviopadrao": 2815.598851444755
       },
       "final_semana": {
-        "count": 46,
-        "soma": 216059,
-        "media": 4696.934782608696
+        "count": 44,
+        "desviopadrao": 3169.136560502253
       },
       "geral": {
-        "count": 191,
-        "soma": 938639,
-        "media": 4914.340314136126
+        "count": 189,
+        "desviopadrao": 2822.8803414916165
       },
       "noturno": {
-        "count": 57,
-        "soma": 273497,
-        "media": 4798.19298245614
+        "count": 56,
+        "desviopadrao": 2884.932259215065
       }
     },
     "ultimos_270_dias": {
+      "dia_17_24": {
+        "count": 52,
+        "desviopadrao": 2718.7858374399875
+      },
+      "dia_1_8": {
+        "count": 63,
+        "desviopadrao": 2723.6717850782866
+      },
+      "dia_25_31": {
+        "count": 17,
+        "desviopadrao": 3276.190849949697
+      },
+      "dia_9_16": {
+        "count": 57,
+        "desviopadrao": 2813.4029542455155
+      },
       "diurno": {
-        "count": 175,
-        "soma": 864420,
-        "media": 4939.542857142857
+        "count": 173,
+        "desviopadrao": 2815.598851444755
       },
       "final_semana": {
-        "count": 46,
-        "soma": 216059,
-        "media": 4696.934782608696
+        "count": 44,
+        "desviopadrao": 3169.136560502253
       },
       "geral": {
-        "count": 191,
-        "soma": 938639,
-        "media": 4914.340314136126
+        "count": 189,
+        "desviopadrao": 2822.8803414916165
       },
       "noturno": {
-        "count": 57,
-        "soma": 273497,
-        "media": 4798.19298245614
+        "count": 56,
+        "desviopadrao": 2884.932259215065
       }
     },
     "ultimos_30_dias": {
+      "dia_17_24": {
+        "count": 23,
+        "desviopadrao": 2295.6827456716883
+      },
+      "dia_1_8": {
+        "count": 40,
+        "desviopadrao": 2572.573917978167
+      },
+      "dia_25_31": {
+        "count": 17,
+        "desviopadrao": 3276.190849949697
+      },
+      "dia_9_16": {
+        "count": 31,
+        "desviopadrao": 2465.975191513753
+      },
       "diurno": {
-        "count": 108,
-        "soma": 528905,
-        "media": 4897.268518518518
+        "count": 102,
+        "desviopadrao": 2620.608295802916
       },
       "final_semana": {
         "count": 28,
-        "soma": 128343,
-        "media": 4583.678571428572
+        "desviopadrao": 3185.4163057605656
       },
       "geral": {
-        "count": 117,
-        "soma": 568487,
-        "media": 4858.863247863248
+        "count": 111,
+        "desviopadrao": 2634.053430804105
       },
       "noturno": {
-        "count": 33,
-        "soma": 148035,
-        "media": 4485.909090909091
+        "count": 32,
+        "desviopadrao": 2719.6231349155237
       }
     },
     "ultimos_365_dias": {
+      "dia_17_24": {
+        "count": 52,
+        "desviopadrao": 2718.7858374399875
+      },
+      "dia_1_8": {
+        "count": 63,
+        "desviopadrao": 2723.6717850782866
+      },
+      "dia_25_31": {
+        "count": 17,
+        "desviopadrao": 3276.190849949697
+      },
+      "dia_9_16": {
+        "count": 57,
+        "desviopadrao": 2813.4029542455155
+      },
       "diurno": {
-        "count": 175,
-        "soma": 864420,
-        "media": 4939.542857142857
+        "count": 173,
+        "desviopadrao": 2815.598851444755
       },
       "final_semana": {
-        "count": 46,
-        "soma": 216059,
-        "media": 4696.934782608696
+        "count": 44,
+        "desviopadrao": 3169.136560502253
       },
       "geral": {
-        "count": 191,
-        "soma": 938639,
-        "media": 4914.340314136126
+        "count": 189,
+        "desviopadrao": 2822.8803414916165
       },
       "noturno": {
-        "count": 57,
-        "soma": 273497,
-        "media": 4798.19298245614
+        "count": 56,
+        "desviopadrao": 2884.932259215065
       }
     },
     "ultimos_7_dias": {
+      "dia_17_24": {
+        "count": 22,
+        "desviopadrao": 2319.078812114098
+      },
       "diurno": {
-        "count": 25,
-        "soma": 123934,
-        "media": 4957.36
+        "count": 19,
+        "desviopadrao": 2351.6770748398867
       },
       "final_semana": {
-        "count": 10,
-        "soma": 36371,
-        "media": 3637.1
+        "count": 3,
+        "desviopadrao": 1945.8731544818982
       },
       "geral": {
-        "count": 29,
-        "soma": 144887,
-        "media": 4996.103448275862
+        "count": 22,
+        "desviopadrao": 2319.078812114098
       },
       "noturno": {
-        "count": 10,
-        "soma": 42246,
-        "media": 4224.6
+        "count": 5,
+        "desviopadrao": 2391.642699066899
       }
     },
     "ultimos_90_dias": {
+      "dia_17_24": {
+        "count": 52,
+        "desviopadrao": 2718.7858374399875
+      },
+      "dia_1_8": {
+        "count": 63,
+        "desviopadrao": 2723.6717850782866
+      },
+      "dia_25_31": {
+        "count": 17,
+        "desviopadrao": 3276.190849949697
+      },
+      "dia_9_16": {
+        "count": 57,
+        "desviopadrao": 2813.4029542455155
+      },
       "diurno": {
-        "count": 175,
-        "soma": 864420,
-        "media": 4939.542857142857
+        "count": 173,
+        "desviopadrao": 2815.598851444755
       },
       "final_semana": {
-        "count": 46,
-        "soma": 216059,
-        "media": 4696.934782608696
+        "count": 44,
+        "desviopadrao": 3169.136560502253
       },
       "geral": {
-        "count": 191,
-        "soma": 938639,
-        "media": 4914.340314136126
+        "count": 189,
+        "desviopadrao": 2822.8803414916165
       },
       "noturno": {
-        "count": 57,
-        "soma": 273497,
-        "media": 4798.19298245614
+        "count": 56,
+        "desviopadrao": 2884.932259215065
       }
     }
   }

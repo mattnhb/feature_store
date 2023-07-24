@@ -49,7 +49,17 @@ def _get_vision_name(grouped_columns):
 
 class DebitoAggregate:
     def create_aggregations(self, vision, df: DataFrame):
-        pprint(vision)
+        # (df.groupBy("client_id")
+        #
+        #  .agg(
+        #     F.percentile_approx("valor", 0.1).alias("D1"),
+        #     F.percentile_approx("valor", 0.2).alias("D2"),
+        #     F.percentile_approx("valor", 0.3).alias("D3"),
+        #     F.percentile_approx("valor", 0.4).alias("D4"),
+        #     F.percentile_approx("valor", 0.5).alias("D5"),
+        # )
+        #  .show(truncate=False))
+        # print("vai mrorer")
         dimensions = vision.get("dimensions", {})
         df = UnionFrames.create(
             [
@@ -71,6 +81,4 @@ class DebitoAggregate:
                 ]
             ]
         )
-        print(_get_vision_name(vision.get("grouped_by")))
-        print(df.count())
         return df

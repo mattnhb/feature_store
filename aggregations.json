@@ -54,6 +54,18 @@
               "final_semana": "data_transacao"
             },
             {
+              "dia_1_8": "data_transacao"
+            },
+            {
+              "dia_9_16": "data_transacao"
+            },
+            {
+              "dia_17_24": "data_transacao"
+            },
+            {
+              "dia_25_31": "data_transacao"
+            },
+            {
               "geral": "data_transacao"
             }
           ]
@@ -69,7 +81,58 @@
             "maximo": "valor"
           },
           {
+            "minimo": "valor"
+          },
+          {
             "count": "valor"
+          },
+          {
+            "desviopadrao": "valor"
+          },
+          {
+            "mediana": "valor"
+          },
+          {
+            "d1": "valor"
+          },
+          {
+            "d2": "valor"
+          },
+          {
+            "d3": "valor"
+          },
+          {
+            "d4": "valor"
+          },
+          {
+            "d5": "valor"
+          },
+          {
+            "d6": "valor"
+          },
+          {
+            "d7": "valor"
+          },
+          {
+            "d8": "valor"
+          },
+          {
+            "d9": "valor"
+          },
+          {
+            "d10": "valor"
+          },
+          {
+            "q1": "valor"
+          },
+          {
+            "q2": "valor"
+          },
+          {
+            "q3": "valor"
+          },
+          {
+            "q4": "valor"
           }
         ]
       }
@@ -78,8 +141,7 @@
   "writing": {
     "partitions": [
       "visao",
-      "anomesdia",
-      "client_id"
+      "data_processamento"
     ],
     "saving_path": "AGGREGATED",
     "saving_format": "parquet",

@@ -8,6 +8,15 @@ def geral(*args, **kwargs):
     return F.lit(True)
 
 
+def check_pattern(input_string, regex_pattern) -> bool:
+    return bool(re.match(regex_pattern, input_string))
+
+
+def day_number_range(day_range: str):
+    start, end = map(int, re.findall(r"\d+", day_range))
+    return set(range(start, end + 1))
+
+
 class PredicateFactory:
     @staticmethod
     def field_equals(key: str, value: str):
@@ -22,16 +31,24 @@ class PredicateFactory:
     @staticmethod
     def field_date_in_condition(key: str, value: str):
         _predicates = {
-            "final_semana": F.dayofweek(value).isin([1, 7]),
-            "noturno": (F.hour(value) >= 22) | (F.hour(value) < 6),
-            "diurno": ~(F.hour(value) >= 22) | (F.hour(value) < 6),
-            "geral": geral(),
+            "final_semana": lambda: F.dayofweek(value).isin([1, 7]),
+            "noturno": lambda: (F.hour(value) >= 22) | (F.hour(value) < 6),
+            "diurno": lambda: ~(F.hour(value) >= 22) | (F.hour(value) < 6),
+            "dia_1_8": lambda: (
+                F.dayofmonth(value).isin(day_number_range(key))
+            ),
+            "dia_9_16": lambda: (
+                F.dayofmonth(value).isin(day_number_range(key))
+            ),
+            "dia_17_24": lambda: (
+                F.dayofmonth(value).isin(day_number_range(key))
+            ),
+            "dia_25_31": lambda: (
+                F.dayofmonth(value).isin(day_number_range(key))
+            ),
+            "geral": lambda: geral(),
         }
-        return _predicates.get(key, geral())
-
-    # {'janela': {'ultimos_180_dias': 'data_transacao'},
-    #  'periodo': {'diurno': 'data_transacao'},
-    #  'subproduto': {'geral': 'subproduto'}},
+        return _predicates.get(key, lambda: geral)()
 
     def dispatcher(self, relations):
         _predicates = {
@@ -44,11 +61,3 @@ class PredicateFactory:
             for relation in relations
             for key, value in relations[relation].items()
         )
-
-
-# POSSIBILITIES: Dict[str, Any] = {
-#     "debito": DebitoOriginData,
-#     "pix": PixOriginData,
-#     "tef": TefOriginData,
-#     "fakedata": FakeData,
-# }

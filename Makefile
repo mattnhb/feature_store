@@ -14,3 +14,8 @@ git:
 .PHONY: agg
 agg:
 	spark-submit --master local --deploy-mode client aggregations.py > output_agg.txt
+
+.PHONY: jsonify
+jsonify:
+	spark-submit --master local --deploy-mode client --driver-memory 4g  jsonify.py > output_js.txt
+
