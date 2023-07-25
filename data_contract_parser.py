@@ -37,9 +37,7 @@ class DataContractParser:
             self.apply_extra_transformations(
                 self.apply_transformation(
                     self.apply_sanitization(
-                        POSSIBILITIES.get(
-                            self.__content["feature_store"]
-                        )().load_data()
+                        POSSIBILITIES.get(self.__content["feature_store"])().load_data()
                     )
                 )
             )
@@ -68,9 +66,7 @@ class DataContractParser:
 
     def apply_sanitization(self, df: DataFrame) -> DataFrame:
         print(f"{df.count()=}")
-        logger.info(
-            "Applying sanitization %s", self.__content.get("sanitization", {})
-        )
+        logger.info("Applying sanitization %s", self.__content.get("sanitization", {}))
         df.show()
         df.printSchema()
         return DataSanitizer.sanitize(

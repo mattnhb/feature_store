@@ -34,18 +34,10 @@ class PredicateFactory:
             "final_semana": lambda: F.dayofweek(value).isin([1, 7]),
             "noturno": lambda: (F.hour(value) >= 22) | (F.hour(value) < 6),
             "diurno": lambda: ~(F.hour(value) >= 22) | (F.hour(value) < 6),
-            "dia_1_8": lambda: (
-                F.dayofmonth(value).isin(day_number_range(key))
-            ),
-            "dia_9_16": lambda: (
-                F.dayofmonth(value).isin(day_number_range(key))
-            ),
-            "dia_17_24": lambda: (
-                F.dayofmonth(value).isin(day_number_range(key))
-            ),
-            "dia_25_31": lambda: (
-                F.dayofmonth(value).isin(day_number_range(key))
-            ),
+            "dia_1_8": lambda: (F.dayofmonth(value).isin(day_number_range(key))),
+            "dia_9_16": lambda: (F.dayofmonth(value).isin(day_number_range(key))),
+            "dia_17_24": lambda: (F.dayofmonth(value).isin(day_number_range(key))),
+            "dia_25_31": lambda: (F.dayofmonth(value).isin(day_number_range(key))),
             "geral": lambda: geral(),
         }
         return _predicates.get(key, lambda: geral)()

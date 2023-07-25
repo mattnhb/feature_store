@@ -7,13 +7,35 @@ from pyspark.sql import DataFrame
 from pyspark.sql import functions as F
 
 
+def union_frames(frames: List[DataFrame]) -> DataFrame:
+    return reduce(
+        lambda df1, df2: df1.unionByName(df2, allowMissingColumns=True),
+        frames,
+    ).distinct()
+
+
+def add_processing_date_column(
+    df: DataFrame, column_name: str = "data_processamento"
+) -> DataFrame:
+    return df.withColumn(
+        column_name,
+        F.date_format(F.current_date(), "yyyy-MM-dd"),
+    )
+
+
+def get_vision_name(grouped_columns, vision_relation):
+    return (
+        vision_relation.get("-".join(grouped_columns))
+        if len(grouped_columns) > 1
+        else vision_relation.get(*grouped_columns)
+    )
+
+
 def _placeholder(df, *args, **kwargs):
     return df
 
 
-def _filter_reducer(
-    df: DataFrame, operator, generator_expression
-) -> DataFrame:
+def _filter_reducer(df: DataFrame, operator, generator_expression) -> DataFrame:
     return df.filter(
         reduce(
             operator,
@@ -34,15 +56,11 @@ def with_column_reducer(
 
 class __Sanitization:
     @staticmethod
-    def remove_nulls(
-        df: DataFrame, fields: List[str], *args, **kwargs
-    ) -> DataFrame:
+    def remove_nulls(df: DataFrame, fields: List[str], *args, **kwargs) -> DataFrame:
         return _filter_reducer(
             df,
             operator=and_,
-            generator_expression=(
-                F.col(field).isNotNull() for field in fields
-            ),
+            generator_expression=(F.col(field).isNotNull() for field in fields),
         )
 
     @staticmethod
@@ -53,8 +71,7 @@ class __Sanitization:
             df,
             operator=and_,
             generator_expression=(
-                ~F.col(field).isin(to_exclude.get(field))
-                for field in to_exclude
+                ~F.col(field).isin(to_exclude.get(field)) for field in to_exclude
             ),
         )
 
@@ -66,17 +83,14 @@ class __Sanitization:
             df,
             operator=and_,
             generator_expression=(
-                F.col(field).isin(to_include.get(field))
-                for field in to_include
+                F.col(field).isin(to_include.get(field)) for field in to_include
             ),
         )
 
 
 class __Transformation:
     @staticmethod
-    def rename(
-        df: DataFrame, to_rename: Dict[str, Any], *args, **kwargs
-    ) -> DataFrame:
+    def rename(df: DataFrame, to_rename: Dict[str, Any], *args, **kwargs) -> DataFrame:
         return with_column_reducer(
             callable_=lambda _df, column_name: _df.withColumnRenamed(
                 column_name, to_rename.get(column_name)
@@ -86,9 +100,7 @@ class __Transformation:
         )
 
     @staticmethod
-    def cast(
-        df: DataFrame, to_cast: Dict[str, Any], *args, **kwargs
-    ) -> DataFrame:
+    def cast(df: DataFrame, to_cast: Dict[str, Any], *args, **kwargs) -> DataFrame:
         return with_column_reducer(
             callable_=lambda _df, column_name: _df.withColumn(
                 column_name, _df[column_name].cast(to_cast.get(column_name))

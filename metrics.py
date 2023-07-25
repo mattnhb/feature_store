@@ -4,11 +4,6 @@ import pyspark.sql.functions as F
 from operator import and_
 
 
-# 'metrics': [{'soma': 'valor'}, {'media': 'valor'}, {'maximo': 'valor'}]}
-
-# metrics=[{'soma': 'valor'}, {'media': 'valor'}, {'maximo': 'valor'}]
-
-
 class MetricsFactory:
     def create_expressions(self, metrics):
         _metrics = {

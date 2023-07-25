@@ -4,24 +4,37 @@ from pprint import pprint
 from typing import Dict, Any
 
 from data_writer import DataWriter
-from debito.debaggr import DebitoAggregate
+from debito.aggregator import DebitoAggregator
 from pyspark.sql import SparkSession
 from pyspark.sql import DataFrame
 import pyspark.sql.functions as F
 
-from predicates import PredicateFactory
+from utils import add_processing_date_column
 
+# +-------------+---------+----------+---------+-----------------------+--------------+----------+-------+------------------+
+# |campo_visao_1|metrica_1|metrica_2 |metrica_3|dimensao_1             |dimensao_2    |dimensao_3|visao  |data_processamento|
+# +-------------+---------+----------+---------+-----------------------+--------------+----------+-------+------------------+
+# |697bb880-24d |92280    |6591.42857|9719     |debito_com_autenticacao|ultimos_7_dias|diurno    |cliente|2023-07-25        |
+# |cdc0b16a-c3f |85349    |5020.52941|9498     |debito_com_autenticacao|ultimos_7_dias|diurno    |cliente|2023-07-25        |
+# |3249f8a6-758 |86591    |5411.9375 |9543     |debito_com_autenticacao|ultimos_7_dias|diurno    |cliente|2023-07-25        |
+# |cc12c55c-4db |49649    |4137.41666|6995     |debito_com_autenticacao|ultimos_7_dias|diurno    |cliente|2023-07-25        |
+# |e524abae-4b6 |77082    |5138.8    |9814     |debito_com_autenticacao|ultimos_7_dias|diurno    |cliente|2023-07-25        |
+# |b3954390-72d |71365    |5489.61538|9969     |debito_com_autenticacao|ultimos_7_dias|diurno    |cliente|2023-07-25        |
+# +-------------+---------+----------+---------+-----------------------+--------------+----------+-------+------------------+
 
 spark = SparkSession.builder.appName("Create Aggregations").getOrCreate()
 
-# df = spark.read.format("parquet").load("S3")
-# df.show(truncate=False)
+VISAO = {
+    "client_id": "cliente",
+    "estabelecimento": "estabelecimento",
+    "client_id-estabelecimento": "cliente_estabelecimento",
+}
 
 DAYS_AGO = 50
 VISION = "cliente"
 
 POSSIBILITIES: Dict[str, Any] = {
-    "debito": DebitoAggregate,
+    "debito": DebitoAggregator,
 }
 
 
@@ -38,37 +51,20 @@ class DataContractParser:
         return (
             spark.read.format(self.__content.get("reading").get("format"))
             .load((self.__content.get("reading").get("path")))
-            .where(
-                (
-                    F.col("anomesdia")
-                    >= F.lit(_get_days_ago_predicate(DAYS_AGO))
-                )
-            )
-        )
-
-    @staticmethod
-    def __add_processing_date_column(df: DataFrame) -> DataFrame:
-        return df.withColumn(
-            "data_processamento",
-            F.date_format(F.current_date(), "yyyy-MM-dd"),
+            .where((F.col("anomesdia") >= F.lit(_get_days_ago_predicate(DAYS_AGO))))
         )
 
     def apply_aggregations(self) -> DataFrame:
-        # pprint(self.__content.get("aggregations", {}).get("general", {}))
-
-        df = POSSIBILITIES.get(
-            self.__content.get("feature_store")
-        )().create_aggregations(
+        df = POSSIBILITIES.get(self.__content.get("feature_store"))(
+            VISAO
+        ).create_aggregations(
             df=self.extract(),
-            vision=self.__content.get("aggregations", {})
-            .get("general", {})
-            .get(VISION, {}),
+            vision=self.__content.get("aggregations", {}).get(VISION, {}),
         )
 
-        df = self.__add_processing_date_column(df)
+        df = add_processing_date_column(df)
         df.show(truncate=False)
-        print(df.columns)
-        DataWriter.save(df, writing_details=self.__content.get("writing"))
+        # DataWriter.save(df, writing_details=self.__content.get("writing"))
 
 
 if __name__ == "__main__":

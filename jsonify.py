@@ -30,36 +30,36 @@ def create_nested_dict(input_dict: Dict[str, Any]) -> Dict[str, Any]:
         key, value = key_value
         keys = key.split("-")
         last_key = keys.pop()
-        reduce(lambda d, k: d.setdefault(k, {}), keys, result)[
-            last_key
-        ] = value
+        reduce(lambda d, k: d.setdefault(k, {}), keys, result)[last_key] = value
         return result
 
     return reduce(add_to_nested_dict, input_dict.items(), {})
 
+
 metric_renamer = {
     "desviopadrao": "desvio_padrao",
     "maximo": "max",
-    "minimo": "min"
-
+    "minimo": "min",
 }
+
+
 def nested_to_json(nested_dict):
     def convert_to_json(d):
         if isinstance(d, dict):
             return F.struct(
                 *[
-                    convert_to_json(d[dimension]).alias(metric_renamer.get(dimension, dimension))
+                    convert_to_json(d[dimension]).alias(
+                        metric_renamer.get(dimension, dimension)
+                    )
                     for dimension in d
                 ]
             )
         return d
 
-    return (convert_to_json(nested_dict))
+    return convert_to_json(nested_dict)
 
 
-spark = SparkSession.builder.appName(
-    "Python Spark SQL basic example"
-).getOrCreate()
+spark = SparkSession.builder.appName("Python Spark SQL basic example").getOrCreate()
 
 dx = spark.read.format("parquet").load("AGGREGATED")
 # print(f"{dx.columns=}")
@@ -121,7 +121,10 @@ colunas = list(filter(lambda coluna: coluna not in {"client_id"}, dx.columns))
 # print(f"{rel_col=}")
 # exit()
 # contactless_sem_autentificacao-ultimos_180_dias-dia_17_24_count
-rel_col = { "-".join(coluna.rsplit("_", 1)): F.col(coluna).alias(f"{coluna}op") for coluna in colunas }
+rel_col = {
+    "-".join(coluna.rsplit("_", 1)): F.col(coluna).alias(f"{coluna}op")
+    for coluna in colunas
+}
 nested = create_nested_dict(rel_col)
 
 # pprint(f"{nested=}")
@@ -134,3 +137,4 @@ dx.printSchema()
 # dx.show(truncate=False)
 # dx.printSchema()
 dx.write.format("json").mode("overwrite").save("aqui")
+print(f"{dx.count()=}")

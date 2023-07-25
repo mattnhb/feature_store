@@ -29,9 +29,7 @@ keys = input_dict.keys()
 values = list(input_dict.values())
 
 # Generate all possible combinations using itertools.product
-combinations = [
-    dict(zip(keys, combination)) for combination in product(*values)
-]
+combinations = [dict(zip(keys, combination)) for combination in product(*values)]
 
 # Print a short example of the output
 pprint(len(combinations))

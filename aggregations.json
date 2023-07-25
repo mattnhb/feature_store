@@ -5,9 +5,11 @@
     "format": "parquet"
   },
   "aggregations": {
-    "general": {
-      "cliente": {
-        "grouped_by": ["client_id"],
+    "cliente": {
+      "grouped_by": [
+        "client_id"
+      ],
+      "general": {
         "dimensions": {
           "subproduto": [
             {
@@ -90,7 +92,7 @@
             "desviopadrao": "valor"
           },
           {
-              "mediana": "valor"
+            "mediana": "valor"
           },
           {
             "d1": "valor"
@@ -135,6 +137,9 @@
             "q4": "valor"
           }
         ]
+      },
+      "specific":{
+        
       }
     }
   },

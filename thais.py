@@ -12,9 +12,7 @@ Faker.seed(0)
 from pyspark.sql import SparkSession
 
 
-spark = SparkSession.builder.appName(
-    "Python Spark SQL basic example"
-).getOrCreate()
+spark = SparkSession.builder.appName("Python Spark SQL basic example").getOrCreate()
 
 df = spark.createDataFrame(
     [
@@ -169,18 +167,14 @@ def create_nested_dict(input_dict: Dict[str, Any]) -> Dict[str, Any]:
         key, value = key_value
         keys = key.split("-")
         last_key = keys.pop()
-        reduce(lambda d, k: d.setdefault(k, {}), keys, result)[
-            last_key
-        ] = value
+        reduce(lambda d, k: d.setdefault(k, {}), keys, result)[last_key] = value
         return result
 
     return reduce(add_to_nested_dict, input_dict.items(), {})
 
 
 dx = reduce(
-    lambda df, coluna: df.withColumnRenamed(
-        coluna, "-".join(coluna.rsplit("_", 1))
-    ),
+    lambda df, coluna: df.withColumnRenamed(coluna, "-".join(coluna.rsplit("_", 1))),
     colunas,
     dx,
 )
@@ -202,10 +196,7 @@ def nested_to_json(nested_dict):
     def convert_to_json(d):
         if isinstance(d, dict):
             return F.struct(
-                *[
-                    convert_to_json(d[dimension]).alias(dimension)
-                    for dimension in d
-                ]
+                *[convert_to_json(d[dimension]).alias(dimension) for dimension in d]
             )
         return d
 

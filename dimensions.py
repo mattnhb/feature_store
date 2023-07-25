@@ -6,17 +6,9 @@ from operator import and_
 
 from pyspark.sql import DataFrame
 
-# columns = {
-#     "subproduto": {"geral": "subproduto"},
-#     "janela": {"ultimos_365_dias": "data_transacao"},
-#     "periodo": {"geral": "data_transacao"},
-# }
-
 
 class DimensionsFactory:
-    def create_columns(
-        self, df: DataFrame, columns, vision: str
-    ) -> DataFrame:
+    def create_columns(self, df: DataFrame, columns, vision: str) -> DataFrame:
         columns.update({"visao": {vision: "placeholder"}})
         return reduce(
             lambda acc_df, column: acc_df.withColumn(

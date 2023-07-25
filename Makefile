@@ -5,7 +5,7 @@ snapshots:
 
 .PHONY: black
 black:
-	black -l 78 .
+	black .
 
 .PHONY: git
 git:
