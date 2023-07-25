@@ -5,9 +5,9 @@
     "format": "parquet"
   },
   "aggregations": {
-    "cliente": {
+    "client_id-estabelecimento": {
       "grouped_by": [
-        "client_id"
+        "client_id","estabelecimento"
       ],
       "general": {
         "dimensions": {
@@ -139,7 +139,7 @@
         ]
       },
       "specific":{
-        
+
       }
     }
   },

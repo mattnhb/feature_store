@@ -15,6 +15,7 @@ from tef.loader.from_origin import TefOriginData
 from services import get_logger
 import pyspark.sql.functions as F
 from pyspark.sql import DataFrame
+from utils import create_single_date_partition
 
 POSSIBILITIES: Dict[str, Any] = {
     "debito": DebitoOriginData,
@@ -33,7 +34,7 @@ class DataContractParser:
         # pprint(self.__content)
 
     def extract(self) -> DataFrame:
-        return self.create_single_date_partition(
+        return create_single_date_partition(
             self.apply_extra_transformations(
                 self.apply_transformation(
                     self.apply_sanitization(
@@ -43,13 +44,7 @@ class DataContractParser:
             )
         )
 
-    @staticmethod
-    def create_single_date_partition(df: DataFrame) -> DataFrame:
-        return reduce(
-            lambda _df, col: _df.withColumn(col, F.lpad(col, 2, "0")),
-            {"mes", "dia"},
-            df,
-        ).withColumn("anomesdia", F.concat_ws("-", "ano", "mes", "dia"))
+    
 
     def apply_transformation(self, df: DataFrame) -> DataFrame:
         print(f"{df.count()=}")

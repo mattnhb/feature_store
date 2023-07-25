@@ -31,7 +31,7 @@ VISAO = {
 }
 
 DAYS_AGO = 50
-VISION = "cliente"
+VISION = "client_id-estabelecimento"
 
 POSSIBILITIES: Dict[str, Any] = {
     "debito": DebitoAggregator,
