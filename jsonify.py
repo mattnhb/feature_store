@@ -76,7 +76,7 @@ dx = (
         F.first("maximo").alias("maximo"),
         F.first("minimo").alias("minimo"),
         F.first("desviopadrao").alias("desviopadrao"),
-        # F.first("mediana").alias("mediana"),
+        F.first("mediana").alias("mediana"),
         F.first("q1").alias("q1"),
         F.first("q2").alias("q2"),
         F.first("q3").alias("q3"),
@@ -129,5 +129,3 @@ dx = dx.withColumn("metricas", nested_to_json(nested)).select("client_id", "metr
 # dx.show(truncate=False)
 # dx.printSchema()
 dx.write.format("json").mode("overwrite").save("aqui")
-while True:
-    pass

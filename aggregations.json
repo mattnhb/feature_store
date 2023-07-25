@@ -90,6 +90,9 @@
             "desviopadrao": "valor"
           },
           {
+              "mediana": "valor"
+          },
+          {
             "d1": "valor"
           },
           {
