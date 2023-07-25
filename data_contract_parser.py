@@ -91,4 +91,4 @@ class DataContractParser:
         df.show(truncate=False)
         df.printSchema()
         print(df.count())
-        # DataWriter.save(df, writing_details=self.__content.get("writing"))
+        DataWriter.save(df, writing_details=self.__content.get("writing"))

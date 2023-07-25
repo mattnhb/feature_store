@@ -17,7 +17,7 @@ class MetricsFactory:
             "maximo": lambda coluna: F.max(coluna),
             "minimo": lambda coluna: F.min(coluna),
             "desviopadrao": lambda coluna: F.stddev(coluna),
-            "mediana": lambda coluna: F.median(coluna),
+            "mediana": lambda coluna: F.expr(f"percentile({coluna}, 0.5)"),
             "count": lambda coluna: F.count(coluna),
             "d1": lambda coluna: F.expr(f"percentile({coluna}, 0.1)"),
             "d2": lambda coluna: F.expr(f"percentile({coluna}, 0.2)"),
