@@ -73,100 +73,191 @@
           ]
         },
         "metrics": [
-          
           {
-            "maximo": ["data_transacao", "maximo-data-transacao"]
+            "maximo": [
+              "data_transacao",
+              "maximoDataTransacao"
+            ]
           },
           {
-            "minimo": ["data_transacao", "minimo-data-transacao"]
+            "minimo": [
+              "data_transacao",
+              "minimoDataTransacao"
+            ]
           },
           {
-            "maximo": ["valor", "maximo-valor"]
+            "maximo": [
+              "valor",
+              "maximoValor"
+            ]
           },
           {
-            "minimo": ["valor", "minimo-valor"]
+            "minimo": [
+              "valor",
+              "minimoValor"
+            ]
           },
           {
-            "cluster-0-500": ["valor", "cluster-0-500-valor"]
+            "cluster-0-500": [
+              "valor",
+              "cluster0to500Valor"
+            ]
           },
           {
-            "cluster-500-1000": ["valor", "cluster-500-1000-valor"]
+            "cluster-500-1000": [
+              "valor",
+              "cluster500to1000Valor"
+            ]
           },
           {
-            "cluster-1000-2000": ["valor", "cluster-1000-2000-valor"]
+            "cluster-1000-2000": [
+              "valor",
+              "cluster1000to2000Valor"
+            ]
           },
           {
-            "cluster-2000-3000": ["valor", "cluster-2000-3000-valor"]
+            "cluster-2000-3000": [
+              "valor",
+              "cluster2000to3000Valor"
+            ]
           },
           {
-            "cluster-3000-5000": ["valor", "cluster-3000-5000-valor"]
+            "cluster-3000-5000": [
+              "valor",
+              "cluster3000to5000Valor"
+            ]
           },
           {
-            "cluster-5000-7000": ["valor", "cluster-5000-7000-valor"]
+            "cluster-5000-7000": [
+              "valor",
+              "cluster5000to7000Valor"
+            ]
           },
           {
-            "cluster-7000-10000": ["valor", "cluster-7000-10000-valor"]
+            "cluster-7000-10000": [
+              "valor",
+              "cluster7000to10000Valor"
+            ]
           },
           {
-            "cluster-beyond-10000": ["valor", "cluster-beyond-10000-valor"]
+            "cluster-beyond-10000": [
+              "valor",
+              "clusterBeyond10000Valor"
+            ]
           },
           {
-            "soma": ["valor", "soma-valor"]
+            "soma": [
+              "valor",
+              "somaValor"
+            ]
           },
           {
-            "media": ["valor", "media-valor"]
-          },
-          
-          {
-            "count": ["valor", "count-valor"]
-          },
-          {
-            "desviopadrao": ["valor", "desviopadrao-valor"]
+            "media": [
+              "valor",
+              "mediaValor"
+            ]
           },
           {
-            "mediana": ["valor", "mediana-valor"]
+            "count": [
+              "valor",
+              "countValor"
+            ]
           },
           {
-            "d1": ["valor", "d1-valor"]
+            "desviopadrao": [
+              "valor",
+              "desviopadraoValor"
+            ]
           },
           {
-            "d2": ["valor", "d2-valor"]
+            "mediana": [
+              "valor",
+              "medianaValor"
+            ]
           },
           {
-            "d3": ["valor", "d3-valor"]
+            "d1": [
+              "valor",
+              "d1Valor"
+            ]
           },
           {
-            "d4": ["valor", "d4-valor"]
+            "d2": [
+              "valor",
+              "d2Valor"
+            ]
           },
           {
-            "d5": ["valor", "d5-valor"]
+            "d3": [
+              "valor",
+              "d3Valor"
+            ]
           },
           {
-            "d6": ["valor", "d6-valor"]
+            "d4": [
+              "valor",
+              "d4Valor"
+            ]
           },
           {
-            "d7": ["valor", "d7-valor"]
+            "d5": [
+              "valor",
+              "d5Valor"
+            ]
           },
           {
-            "d8": ["valor", "d8-valor"]
+            "d6": [
+              "valor",
+              "d6Valor"
+            ]
           },
           {
-            "d9": ["valor", "d9-valor"]
+            "d7": [
+              "valor",
+              "d7Valor"
+            ]
           },
           {
-            "d10": ["valor", "d10-valor"]
+            "d8": [
+              "valor",
+              "d8Valor"
+            ]
           },
           {
-            "q1": ["valor", "q1-valor"]
+            "d9": [
+              "valor",
+              "d9Valor"
+            ]
           },
           {
-            "q2": ["valor", "q2-valor"]
+            "d10": [
+              "valor",
+              "d10Valor"
+            ]
           },
           {
-            "q3": ["valor", "q3-valor"]
+            "q1": [
+              "valor",
+              "q1Valor"
+            ]
           },
           {
-            "q4": ["valor", "q4-valor"]
+            "q2": [
+              "valor",
+              "q2Valor"
+            ]
+          },
+          {
+            "q3": [
+              "valor",
+              "q3Valor"
+            ]
+          },
+          {
+            "q4": [
+              "valor",
+              "q4Valor"
+            ]
           }
         ]
       },
