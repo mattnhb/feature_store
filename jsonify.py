@@ -64,11 +64,17 @@ spark = SparkSession.builder.appName("Python Spark SQL basic example").getOrCrea
 dx = spark.read.format("parquet").load(
     "AGGREGATED/visao=cliente/data_processamento=2023-07-26"
 )
+CAMPOS_VISAO = ["client_id"]
+DIMENSION_NAME = ["subproduto", "janela", "periodo"]
+SPECIFI_METRICS = ['datediffwithmindate', 'datediffwithmaxdate']
 # print(f"{dx.columns=}")
 # print(f"{len(dx.columns)=}")
+first_colunas = list(filter(lambda coluna: coluna not in {*DIMENSION_NAME, *CAMPOS_VISAO}, dx.columns))
+print(f"{first_colunas=}")
+# exit()
 dx = dx.withColumn(
     "_pivot",
-    F.concat_ws("#", "subproduto", "janela", "periodo"),
+    F.concat_ws("#", *DIMENSION_NAME),
 )
 dx = dx.select(sorted(dx.columns))
 dx.show(truncate=False)
@@ -79,42 +85,43 @@ dx = (
     dx.groupBy("client_id")
     .pivot("_pivot")
     .agg(
+        *[F.first(metric, ignorenulls=(True if metric in SPECIFI_METRICS else False)).alias(metric) for metric in first_colunas]
         
-        F.first("maximoDataTransacao").alias('maximoDataTransacao'),
-        F.first("minimoDataTransacao").alias('minimoDataTransacao'),
-        F.first("maximoValor").alias('maximoValor'),
-        F.first("minimoValor").alias('minimoValor'),
-        F.first("cluster0to500Valor").alias('cluster0to500Valor'),
-        F.first("cluster500to1000Valor").alias('cluster500to1000Valor'),
-        F.first("cluster1000to2000Valor").alias('cluster1000to2000Valor'),
-        F.first("cluster2000to3000Valor").alias('cluster2000to3000Valor'),
-        F.first("cluster3000to5000Valor").alias('cluster3000to5000Valor'),
-        F.first("cluster5000to7000Valor").alias('cluster5000to7000Valor'),
-        F.first("cluster7000to10000Valor").alias('cluster7000to10000Valor'),
-        F.first("clusterBeyond10000Valor").alias('clusterBeyond10000Valor'),
-        F.first("somaValor").alias('somaValor'),
-        F.first("mediaValor").alias('mediaValor'),
-        F.first("countValor").alias('countValor'),
-        F.first("desviopadraoValor").alias('desviopadraoValor'),
-        F.first("medianaValor").alias('medianaValor'),
-        F.first("d1Valor").alias('d1Valor'),
-        F.first("d2Valor").alias('d2Valor'),
-        F.first("d3Valor").alias('d3Valor'),
-        F.first("d4Valor").alias('d4Valor'),
-        F.first("d5Valor").alias('d5Valor'),
-        F.first("d6Valor").alias('d6Valor'),
-        F.first("d7Valor").alias('d7Valor'),
-        F.first("d8Valor").alias('d8Valor'),
-        F.first("d9Valor").alias('d9Valor'),
-        F.first("d10Valor").alias('d10Valor'),
-        F.first("q1Valor").alias('q1Valor'),
-        F.first("q2Valor").alias('q2Valor'),
-        F.first("q3Valor").alias('q3Valor'),
-        F.first("q4Valor").alias('q4Valor'),
+        # F.first("maximoDataTransacao").alias('maximoDataTransacao'),
+        # F.first("minimoDataTransacao").alias('minimoDataTransacao'),
+        # F.first("maximoValor").alias('maximoValor'),
+        # F.first("minimoValor").alias('minimoValor'),
+        # F.first("cluster0to500Valor").alias('cluster0to500Valor'),
+        # F.first("cluster500to1000Valor").alias('cluster500to1000Valor'),
+        # F.first("cluster1000to2000Valor").alias('cluster1000to2000Valor'),
+        # F.first("cluster2000to3000Valor").alias('cluster2000to3000Valor'),
+        # F.first("cluster3000to5000Valor").alias('cluster3000to5000Valor'),
+        # F.first("cluster5000to7000Valor").alias('cluster5000to7000Valor'),
+        # F.first("cluster7000to10000Valor").alias('cluster7000to10000Valor'),
+        # F.first("clusterBeyond10000Valor").alias('clusterBeyond10000Valor'),
+        # F.first("somaValor").alias('somaValor'),
+        # F.first("mediaValor").alias('mediaValor'),
+        # F.first("countValor").alias('countValor'),
+        # F.first("desviopadraoValor").alias('desviopadraoValor'),
+        # F.first("medianaValor").alias('medianaValor'),
+        # F.first("d1Valor").alias('d1Valor'),
+        # F.first("d2Valor").alias('d2Valor'),
+        # F.first("d3Valor").alias('d3Valor'),
+        # F.first("d4Valor").alias('d4Valor'),
+        # F.first("d5Valor").alias('d5Valor'),
+        # F.first("d6Valor").alias('d6Valor'),
+        # F.first("d7Valor").alias('d7Valor'),
+        # F.first("d8Valor").alias('d8Valor'),
+        # F.first("d9Valor").alias('d9Valor'),
+        # F.first("d10Valor").alias('d10Valor'),
+        # F.first("q1Valor").alias('q1Valor'),
+        # F.first("q2Valor").alias('q2Valor'),
+        # F.first("q3Valor").alias('q3Valor'),
+        # F.first("q4Valor").alias('q4Valor'),
 
 
-        F.first("datediffwithmindate", ignorenulls=True).alias("datediffwithmindate"),
-        F.first("datediffwithmaxdate", ignorenulls=True).alias("datediffwithmaxdate"),
+        # F.first("datediffwithmindate", ignorenulls=True).alias("datediffwithmindate"),
+        # F.first("datediffwithmaxdate", ignorenulls=True).alias("datediffwithmaxdate"),
     )
 )
 dx.show(truncate=False)
