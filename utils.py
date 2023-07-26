@@ -13,12 +13,14 @@ def union_frames(frames: List[DataFrame]) -> DataFrame:
         frames,
     ).distinct()
 
+
 def create_single_date_partition(df: DataFrame) -> DataFrame:
     return reduce(
         lambda _df, col: _df.withColumn(col, F.lpad(col, 2, "0")),
         {"mes", "dia"},
         df,
     ).withColumn("anomesdia", F.concat_ws("-", "ano", "mes", "dia"))
+
 
 def add_processing_date_column(
     df: DataFrame, column_name: str = "data_processamento"

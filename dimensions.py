@@ -8,8 +8,7 @@ from pyspark.sql import DataFrame
 
 
 class DimensionsFactory:
-    def create_columns(self, df: DataFrame, columns, vision: str) -> DataFrame:
-        columns.update({"visao": {vision: "placeholder"}})
+    def create_columns(self, df: DataFrame, columns) -> DataFrame:
         return reduce(
             lambda acc_df, column: acc_df.withColumn(
                 column, F.lit(next(iter(columns[column].keys())))

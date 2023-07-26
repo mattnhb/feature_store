@@ -31,15 +31,7 @@ class BaseAggregator(ABC):
                 )
                 .groupBy(*grouped_by)
                 .agg(*self.mf.create_expressions(metrics))
-                .transform(
-                    lambda _df: self.dimf.create_columns(
-                        _df,
-                        combination,
-                        get_vision_name(
-                            grouped_by, vision_relation=self.vision_relation
-                        ),
-                    )
-                )
+                .transform(lambda _df: self.dimf.create_columns(_df, combination))
                 for combination in [
                     dict(zip(dimensions.keys(), combination))
                     for combination in product(*list(dimensions.values()))

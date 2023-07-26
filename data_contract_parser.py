@@ -44,8 +44,6 @@ class DataContractParser:
             )
         )
 
-    
-
     def apply_transformation(self, df: DataFrame) -> DataFrame:
         print(f"{df.count()=}")
         logger.info(

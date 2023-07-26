@@ -30,8 +30,8 @@ VISAO = {
     "client_id-estabelecimento": "cliente_estabelecimento",
 }
 
-DAYS_AGO = 50
-VISION = "client_id-estabelecimento"
+DAYS_AGO = 10
+VISION = "cliente"
 
 POSSIBILITIES: Dict[str, Any] = {
     "debito": DebitoAggregator,
@@ -64,7 +64,7 @@ class DataContractParser:
 
         df = add_processing_date_column(df)
         df.show(truncate=False)
-        # DataWriter.save(df, writing_details=self.__content.get("writing"))
+        DataWriter.save(df, writing_details=self.__content.get("writing"))
 
 
 if __name__ == "__main__":

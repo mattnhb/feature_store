@@ -5,9 +5,9 @@
     "format": "parquet"
   },
   "aggregations": {
-    "client_id-estabelecimento": {
+    "cliente": {
       "grouped_by": [
-        "client_id","estabelecimento"
+        "client_id"
       ],
       "general": {
         "dimensions": {
@@ -73,74 +73,104 @@
           ]
         },
         "metrics": [
+          
           {
-            "soma": "valor"
+            "maximo": ["data_transacao", "maximo-data-transacao"]
           },
           {
-            "media": "valor"
+            "minimo": ["data_transacao", "minimo-data-transacao"]
           },
           {
-            "maximo": "valor"
+            "maximo": ["valor", "maximo-valor"]
           },
           {
-            "minimo": "valor"
+            "minimo": ["valor", "minimo-valor"]
           },
           {
-            "count": "valor"
+            "cluster-0-500": ["valor", "cluster-0-500-valor"]
           },
           {
-            "desviopadrao": "valor"
+            "cluster-500-1000": ["valor", "cluster-500-1000-valor"]
           },
           {
-            "mediana": "valor"
+            "cluster-1000-2000": ["valor", "cluster-1000-2000-valor"]
           },
           {
-            "d1": "valor"
+            "cluster-2000-3000": ["valor", "cluster-2000-3000-valor"]
           },
           {
-            "d2": "valor"
+            "cluster-3000-5000": ["valor", "cluster-3000-5000-valor"]
           },
           {
-            "d3": "valor"
+            "cluster-5000-7000": ["valor", "cluster-5000-7000-valor"]
           },
           {
-            "d4": "valor"
+            "cluster-7000-10000": ["valor", "cluster-7000-10000-valor"]
           },
           {
-            "d5": "valor"
+            "cluster-beyond-10000": ["valor", "cluster-beyond-10000-valor"]
           },
           {
-            "d6": "valor"
+            "soma": ["valor", "soma-valor"]
           },
           {
-            "d7": "valor"
+            "media": ["valor", "media-valor"]
+          },
+          
+          {
+            "count": ["valor", "count-valor"]
           },
           {
-            "d8": "valor"
+            "desviopadrao": ["valor", "desviopadrao-valor"]
           },
           {
-            "d9": "valor"
+            "mediana": ["valor", "mediana-valor"]
           },
           {
-            "d10": "valor"
+            "d1": ["valor", "d1-valor"]
           },
           {
-            "q1": "valor"
+            "d2": ["valor", "d2-valor"]
           },
           {
-            "q2": "valor"
+            "d3": ["valor", "d3-valor"]
           },
           {
-            "q3": "valor"
+            "d4": ["valor", "d4-valor"]
           },
           {
-            "q4": "valor"
+            "d5": ["valor", "d5-valor"]
+          },
+          {
+            "d6": ["valor", "d6-valor"]
+          },
+          {
+            "d7": ["valor", "d7-valor"]
+          },
+          {
+            "d8": ["valor", "d8-valor"]
+          },
+          {
+            "d9": ["valor", "d9-valor"]
+          },
+          {
+            "d10": ["valor", "d10-valor"]
+          },
+          {
+            "q1": ["valor", "q1-valor"]
+          },
+          {
+            "q2": ["valor", "q2-valor"]
+          },
+          {
+            "q3": ["valor", "q3-valor"]
+          },
+          {
+            "q4": ["valor", "q4-valor"]
           }
         ]
       },
-      "specific":{
-
-      }
+      "specific": true
     }
   },
   "writing": {
