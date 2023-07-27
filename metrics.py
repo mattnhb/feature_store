@@ -44,6 +44,7 @@ class MetricsFactory:
             "desviopadrao": lambda coluna: F.stddev(coluna),
             "mediana": lambda coluna: F.expr(f"percentile({coluna}, 0.5)"),
             "count": lambda coluna: F.count(coluna),
+            "count_distinct": lambda coluna: F.count_distinct(coluna),
             # "amount-days-min-max": lambda coluna:
         }
 

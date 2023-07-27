@@ -14,8 +14,7 @@ from utils import get_vision_name, union_frames
 
 
 class BaseAggregator(ABC):
-    def __init__(self, vision_relation) -> None:
-        self.vision_relation = vision_relation
+    def __init__(self) -> None:
         self.pf = PredicateFactory()
         self.dimf = DimensionsFactory()
         self.mf = MetricsFactory()

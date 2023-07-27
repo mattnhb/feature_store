@@ -31,7 +31,6 @@ VISAO = {
 }
 
 DAYS_AGO = 10
-VISION = "cliente"
 
 POSSIBILITIES: Dict[str, Any] = {
     "debito": DebitoAggregator,
@@ -43,8 +42,9 @@ def _get_days_ago_predicate(days_ago: int) -> date:
 
 
 class DataContractParser:
-    def __init__(self):
-        with open("aggregations.json") as json_file:
+    def __init__(self, vision):
+        self.vision = vision
+        with open(f"aggregations_{vision}.json") as json_file:
             self.__content = json.load(json_file)
 
     def extract(self) -> DataFrame:
@@ -56,16 +56,17 @@ class DataContractParser:
 
     def apply_aggregations(self) -> DataFrame:
         df = POSSIBILITIES.get(self.__content.get("feature_store"))(
-            VISAO
+            vision=self.__content.get("aggregations", {}).get(self.vision, {}),
         ).create_aggregations(
             df=self.extract(),
-            vision=self.__content.get("aggregations", {}).get(VISION, {}),
         )
 
         df = add_processing_date_column(df)
-        df.show(truncate=False)
+        # df.show(truncate=False)
+        print("bora escrever")
         DataWriter.save(df, writing_details=self.__content.get("writing"))
 
 
 if __name__ == "__main__":
-    DataContractParser().apply_aggregations()
+    for vision in ("cliente", "estabelecimento", "cliente_estabelecimento"):
+        DataContractParser(vision).apply_aggregations()

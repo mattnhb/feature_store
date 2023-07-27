@@ -43,6 +43,7 @@ class PredicateFactory:
         return _predicates.get(key, lambda: geral)()
 
     def dispatcher(self, relations):
+        # relations={'subproduto': {'debito_com_autenticacao': 'subproduto'}, 'janela': {'ultimos_7_dias': 'data_transacao'}, 'periodo': {'diurno': 'data_transacao'}}
         _predicates = {
             "subproduto": self.field_equals,
             "janela": self.field_last_n_days,

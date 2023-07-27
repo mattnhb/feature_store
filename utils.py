@@ -8,11 +8,11 @@ from pyspark.sql import functions as F
 
 
 def union_frames(frames: List[DataFrame]) -> DataFrame:
+    print(f"{frames=}")
     return reduce(
         lambda df1, df2: df1.unionByName(df2, allowMissingColumns=True),
         frames,
-    ).distinct()
-
+    )
 
 def create_single_date_partition(df: DataFrame) -> DataFrame:
     return reduce(
@@ -32,11 +32,7 @@ def add_processing_date_column(
 
 
 def get_vision_name(grouped_columns, vision_relation):
-    return (
-        vision_relation.get("-".join(grouped_columns))
-        if len(grouped_columns) > 1
-        else vision_relation.get(*grouped_columns)
-    )
+    return vision_relation.get(tuple(grouped_columns))
 
 
 def _placeholder(df, *args, **kwargs):

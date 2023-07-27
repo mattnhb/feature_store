@@ -1,0 +1,255 @@
+{
+  "feature_store": "debito",
+  "reading": {
+    "path": "S3",
+    "format": "parquet"
+  },
+  "aggregations": {
+    "estabelecimento": {
+      "grouped_by": [
+        "estabelecimento"
+      ],
+      "general": {
+        "dimensions": {
+          "subproduto": [
+            {
+              "debito_com_autenticacao": "subproduto"
+            },
+            {
+              "debito_sem_autenticacao": "subproduto"
+            },
+            {
+              "contactless_sem_autentificacao": "subproduto"
+            },
+            {
+              "geral": "subproduto"
+            }
+          ],
+          "janela": [
+            {
+              "ultimos_7_dias": "data_transacao"
+            },
+            {
+              "ultimos_30_dias": "data_transacao"
+            },
+            {
+              "ultimos_90_dias": "data_transacao"
+            },
+            {
+              "ultimos_180_dias": "data_transacao"
+            },
+            {
+              "ultimos_270_dias": "data_transacao"
+            },
+            {
+              "ultimos_365_dias": "data_transacao"
+            }
+          ],
+          "periodo": [
+            {
+              "geral": "data_transacao"
+            }
+          ]
+        },
+        "metrics": [
+          {
+            "maximo": [
+              "data_transacao",
+              "maximoDataTransacao"
+            ]
+          },
+          {
+            "minimo": [
+              "data_transacao",
+              "minimoDataTransacao"
+            ]
+          },
+          {
+            "maximo": [
+              "valor",
+              "maximoValor"
+            ]
+          },
+          {
+            "minimo": [
+              "valor",
+              "minimoValor"
+            ]
+          },
+          {
+            "cluster-0-500": [
+              "valor",
+              "cluster0to500Valor"
+            ]
+          },
+          {
+            "cluster-500-1000": [
+              "valor",
+              "cluster500to1000Valor"
+            ]
+          },
+          {
+            "cluster-1000-2000": [
+              "valor",
+              "cluster1000to2000Valor"
+            ]
+          },
+          {
+            "cluster-2000-3000": [
+              "valor",
+              "cluster2000to3000Valor"
+            ]
+          },
+          {
+            "cluster-3000-5000": [
+              "valor",
+              "cluster3000to5000Valor"
+            ]
+          },
+          {
+            "cluster-5000-7000": [
+              "valor",
+              "cluster5000to7000Valor"
+            ]
+          },
+          {
+            "cluster-7000-10000": [
+              "valor",
+              "cluster7000to10000Valor"
+            ]
+          },
+          {
+            "cluster-beyond-10000": [
+              "valor",
+              "clusterBeyond10000Valor"
+            ]
+          },
+          {
+            "soma": [
+              "valor",
+              "somaValor"
+            ]
+          },
+          {
+            "media": [
+              "valor",
+              "mediaValor"
+            ]
+          },
+          {
+            "count": [
+              "valor",
+              "countValor"
+            ]
+          },
+          {
+            "desviopadrao": [
+              "valor",
+              "desviopadraoValor"
+            ]
+          },
+          {
+            "mediana": [
+              "valor",
+              "medianaValor"
+            ]
+          },
+          {
+            "d1": [
+              "valor",
+              "d1Valor"
+            ]
+          },
+          {
+            "d2": [
+              "valor",
+              "d2Valor"
+            ]
+          },
+          {
+            "d3": [
+              "valor",
+              "d3Valor"
+            ]
+          },
+          {
+            "d4": [
+              "valor",
+              "d4Valor"
+            ]
+          },
+          {
+            "d5": [
+              "valor",
+              "d5Valor"
+            ]
+          },
+          {
+            "d6": [
+              "valor",
+              "d6Valor"
+            ]
+          },
+          {
+            "d7": [
+              "valor",
+              "d7Valor"
+            ]
+          },
+          {
+            "d8": [
+              "valor",
+              "d8Valor"
+            ]
+          },
+          {
+            "d9": [
+              "valor",
+              "d9Valor"
+            ]
+          },
+          {
+            "d10": [
+              "valor",
+              "d10Valor"
+            ]
+          },
+          {
+            "q1": [
+              "valor",
+              "q1Valor"
+            ]
+          },
+          {
+            "q2": [
+              "valor",
+              "q2Valor"
+            ]
+          },
+          {
+            "q3": [
+              "valor",
+              "q3Valor"
+            ]
+          },
+          {
+            "q4": [
+              "valor",
+              "q4Valor"
+            ]
+          }
+        ]
+      },
+      "specific": true
+    }
+  },
+  "writing": {
+    "partitions": [
+      "visao",
+      "data_processamento"
+    ],
+    "saving_path": "AGGREGATED",
+    "saving_format": "json",
+    "saving_mode": "overwrite"
+  }
+}
