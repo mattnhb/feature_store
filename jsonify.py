@@ -65,7 +65,7 @@ for vision in relation:
         .filter(F.col("data_processamento") == "2023-07-28")
         .drop("data_processamento")
     )
-    print(f"{vision=}")
+    # print(f"{vision=}")
 
     first_colunas = list(
         filter(
@@ -74,7 +74,7 @@ for vision in relation:
             dx.columns,
         )
     )
-    print(f"{first_colunas=}")
+    # print(f"{first_colunas=}")
 
     dx = dx.withColumn(
         "_pivot",
@@ -95,53 +95,7 @@ for vision in relation:
         )
     )
 
-    import itertools
-
-    subproduto = [
-        "debito_com_autenticacao",
-        "debito_sem_autenticacao",
-        "contactless_sem_autentificacao",
-        "geral",
-    ]
-
-    janela = [
-        "ultimos_7_dias",
-        "ultimos_30_dias",
-        "ultimos_90_dias",
-        "ultimos_180_dias",
-        "ultimos_270_dias",
-        "ultimos_365_dias",
-    ]
-
-    periodo = ["diurno", "noturno", "geral"]
-
-    metricas = ["countDistinctEstabelecimento"]
-
-    def replace_last_hash(item):
-        return "_".join(item.rsplit("#", 1))
-
-    combined_list = list(
-        map(
-            replace_last_hash,
-            [
-                "#".join(items)
-                for items in itertools.product(subproduto, janela, periodo, metricas)
-            ],
-        )
-    )
-
-    filtered_list = list(
-        filter(
-            lambda item: (
-                item.endswith("countDistinctEstabelecimento")
-                and item not in combined_list
-            ),
-            dx.columns,
-        ),
-    )
-
-    print(f"{filtered_list=}")
-    dx = dx.drop(*filtered_list)
+    dx = dx.drop(*[])
     colunas = list(
         filter(lambda coluna: coluna not in {*handler.grouped_by}, dx.columns)
     )
@@ -151,13 +105,10 @@ for vision in relation:
         for coluna in colunas
     }
     nested = create_nested_dict(rel_col)
+    # dx.printSchema()
 
-    dx = (
-        dx.withColumn("metricas", nested_to_json(nested))
-        .select(*handler.grouped_by, "metricas")
-        .withColumn("visao", F.lit(vision))
-    )
-
+    dx = dx.withColumn("metricas", nested_to_json(nested))
+    dx = handler.to_dynamo_schema(dx)
     DataWriter.save(
         dx,
         writing_details={
@@ -167,8 +118,8 @@ for vision in relation:
             "saving_mode": "overwrite",
         },
     )
-    dx.show()
+    # dx.show()
 
-    print(f"{dx.schema.json()=}")
+    # print(f"{dx.schema.json()=}")
 
-    print(f"{dx.count()=}")
+    # print(f"{dx.count()=}")
