@@ -53,6 +53,12 @@
         },
         "metrics": [
           {
+            "count_distinct": [
+              "client_id",
+              "countDistinctCliente"
+            ]
+          },
+          {
             "maximo": [
               "data_transacao",
               "maximoDataTransacao"

@@ -74,6 +74,12 @@
         },
         "metrics": [
           {
+            "count_distinct": [
+              "estabelecimento",
+              "countDistinctEstabelecimento"
+            ]
+          },
+          {
             "maximo": [
               "data_transacao",
               "maximoDataTransacao"

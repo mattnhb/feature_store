@@ -7,6 +7,7 @@ from faker import Faker
 from random import choice
 from pyspark.sql.window import Window
 from pprint import pprint
+from debito.jsonify_handler import DebitoJsonifyHandler
 
 fake = Faker()
 Faker.seed(0)
@@ -14,6 +15,8 @@ Faker.seed(0)
 from pyspark.sql import SparkSession
 from typing import Dict, Any, Iterable, Tuple
 from pyspark.sql.types import StructType, StructField, StringType, DateType, DoubleType
+
+POSSIBILITIES = {"debito": DebitoJsonifyHandler}
 
 
 def create_nested_dict(input_dict: Dict[str, Any]) -> Dict[str, Any]:
@@ -37,7 +40,9 @@ def nested_to_json(nested_dict):
             )
         return (
             F.coalesce(d, F.lit(0))
-            if not any(metric in d._jc.toString() for metric in SPECIFI_METRICS)
+            if not any(
+                metric in d._jc.toString() for metric in handler.specific_metrics
+            )
             else d
         )
 
@@ -45,31 +50,27 @@ def nested_to_json(nested_dict):
 
 
 spark = SparkSession.builder.appName("Python Spark SQL basic example").getOrCreate()
-CAMPOS_VISAO = ["estabelecimento"]
-DIMENSION_NAME = ["subproduto", "janela", "periodo"]
-SPECIFI_METRICS = [
-    "diasDesdePrimeiraTransacao",
-    "diasDesdeUltimaTransacao",
-    "countDistinctCliente",
-    "countDistinctEstabelecimento",
-]
+
 relation = {
     "cliente": ("client_id",),
     "estabelecimento": ("estabelecimento",),
     "cliente_estabelecimento": ("client_id", "estabelecimento"),
 }
 for vision in relation:
+    handler = POSSIBILITIES.get("debito")(vision)
+
     dx = (
         spark.read.format("json")
         .load(f"AGGREGATED/visao={vision}/")
-        .filter(F.col("data_processamento") == "2023-07-27")
+        .filter(F.col("data_processamento") == "2023-07-28")
         .drop("data_processamento")
     )
     print(f"{vision=}")
 
     first_colunas = list(
         filter(
-            lambda coluna: coluna not in {*DIMENSION_NAME, *relation[vision]},
+            lambda coluna: coluna
+            not in {*handler.dimension_names, *handler.grouped_by},
             dx.columns,
         )
     )
@@ -77,16 +78,17 @@ for vision in relation:
 
     dx = dx.withColumn(
         "_pivot",
-        F.concat_ws("#", *DIMENSION_NAME),
+        F.concat_ws("#", *handler.dimension_names),
     )
 
     dx = (
-        dx.groupBy(*relation[vision])
+        dx.groupBy(*handler.grouped_by)
         .pivot("_pivot")
         .agg(
             *[
                 F.first(
-                    metric, ignorenulls=(True if metric in SPECIFI_METRICS else False)
+                    metric,
+                    ignorenulls=(True if metric in handler.specific_metrics else False),
                 ).alias(metric)
                 for metric in first_colunas
             ]
@@ -115,15 +117,18 @@ for vision in relation:
 
     metricas = ["countDistinctEstabelecimento"]
 
-
     def replace_last_hash(item):
         return "_".join(item.rsplit("#", 1))
 
-    combined_list = list(map(replace_last_hash, [
-        '#'.join(items)
-        for items in itertools.product(subproduto, janela, periodo, metricas)
-    ]))
-    
+    combined_list = list(
+        map(
+            replace_last_hash,
+            [
+                "#".join(items)
+                for items in itertools.product(subproduto, janela, periodo, metricas)
+            ],
+        )
+    )
 
     filtered_list = list(
         filter(
@@ -137,7 +142,9 @@ for vision in relation:
 
     print(f"{filtered_list=}")
     dx = dx.drop(*filtered_list)
-    colunas = list(filter(lambda coluna: coluna not in {*relation[vision]}, dx.columns))
+    colunas = list(
+        filter(lambda coluna: coluna not in {*handler.grouped_by}, dx.columns)
+    )
 
     rel_col = {
         "#".join(coluna.rsplit("_", 1)): F.col(coluna).alias(f"{coluna}")
@@ -147,7 +154,7 @@ for vision in relation:
 
     dx = (
         dx.withColumn("metricas", nested_to_json(nested))
-        .select(*relation[vision], "metricas")
+        .select(*handler.grouped_by, "metricas")
         .withColumn("visao", F.lit(vision))
     )
 

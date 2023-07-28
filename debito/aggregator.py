@@ -148,6 +148,9 @@ class DebitoAggregator(BaseAggregator):
         self, df: DataFrame, enabled: bool
     ) -> DataFrame:
         if enabled:
-            x = [*self._date_diff_today_first_last(df), *self._count_field_distinct(df)]
+            x = [
+                *self._date_diff_today_first_last(df),
+                #  *self._count_field_distinct(df)
+            ]
 
             return x
