@@ -37,7 +37,6 @@ class DebitoAggregator(BaseAggregator):
         if specific := self.create_specific_unified_aggregations(
             df, enabled=self.vision.get("specific", False)
         ):
-            
             aggregated = union_frames([aggregated, *specific])
 
         return aggregated.withColumn(
@@ -50,7 +49,9 @@ class DebitoAggregator(BaseAggregator):
             return []
         # colocar namedtuple se encaixar legal
         target = (
-            ("client_id", "cliente") if self.vision_name == "estabelecimento" else ("estabelecimento", "estabelecimento")
+            ("client_id", "cliente")
+            if self.vision_name == "estabelecimento"
+            else ("estabelecimento", "estabelecimento")
         )
         print(f"{target=}")
         _dim_combinations = {
@@ -95,12 +96,16 @@ class DebitoAggregator(BaseAggregator):
                 ],
             },
         }
-        return [self.create_general_unified_aggregations(
-            df,
-            grouped_by=self.vision.get("grouped_by"),
-            dimensions=_dim_combinations[self.vision_name],
-            metrics=[{"count_distinct": [target[0], f"countDistinct{target[1].title()}"]}],
-        )]
+        return [
+            self.create_general_unified_aggregations(
+                df,
+                grouped_by=self.vision.get("grouped_by"),
+                dimensions=_dim_combinations[self.vision_name],
+                metrics=[
+                    {"count_distinct": [target[0], f"countDistinct{target[1].title()}"]}
+                ],
+            )
+        ]
 
     def _date_diff_today_first_last(self, df: DataFrame) -> List[DataFrame]:
         min_date = F.min(F.col("data_transacao")).over(

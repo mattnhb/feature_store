@@ -18,6 +18,7 @@ class DataWriter:
                 "partitionOverwriteMode",
                 writing_details.get("partitionOverwriteMode", "dynamic"),
             )
+            .option("ignoreNullFields", False)
             .format(writing_details.get("saving_format"))
             .mode(writing_details.get("saving_mode"))
             .partitionBy(*writing_details.get("partitions"))

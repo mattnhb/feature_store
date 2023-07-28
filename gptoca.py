@@ -1,6 +1,13 @@
-import re
+def get_nested_fields(schema, prefix="", delimiter="#"):
+    nested_fields = []
 
-day_range = "dia_15_16"
-start, end = map(int, re.findall(r"\d+", day_range))
-numbers = set(range(start, end + 1))
-print(numbers)  # Output: {1, 2, 3, 4, 5, 6, 7, 8}
+    for field in schema.fields:
+        full_name = f"{prefix}{field.name}"
+        if isinstance(field.dataType, StructType):
+            nested_fields.extend(
+                get_nested_fields(field.dataType, full_name + delimiter, delimiter)
+            )
+        else:
+            nested_fields.append(full_name)
+
+    return nested_fields

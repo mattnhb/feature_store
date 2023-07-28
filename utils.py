@@ -14,6 +14,7 @@ def union_frames(frames: List[DataFrame]) -> DataFrame:
         frames,
     )
 
+
 def create_single_date_partition(df: DataFrame) -> DataFrame:
     return reduce(
         lambda _df, col: _df.withColumn(col, F.lpad(col, 2, "0")),
