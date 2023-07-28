@@ -32,18 +32,14 @@ def create_nested_dict(input_dict: Dict[str, Any]) -> Dict[str, Any]:
     return reduce(add_to_nested_dict, input_dict.items(), {})
 
 
-def nested_to_json(nested_dict):
+def nested_to_json(nested_dict, metrics_default_values):
     def convert_to_json(d):
         if isinstance(d, dict):
             return F.struct(
                 *[convert_to_json(d[dimension]).alias(dimension) for dimension in d]
             )
-        return (
-            F.coalesce(d, F.lit(0))
-            if not any(
-                metric in d._jc.toString() for metric in handler.specific_metrics
-            )
-            else d
+        return F.coalesce(
+            d, F.lit(metrics_default_values.get(d._jc.toString().rsplit("_", 1)[1], 0))
         )
 
     return convert_to_json(nested_dict)
@@ -100,14 +96,14 @@ for vision in relation:
         filter(lambda coluna: coluna not in {*handler.grouped_by}, dx.columns)
     )
 
-    rel_col = {
-        "#".join(coluna.rsplit("_", 1)): F.col(coluna).alias(f"{coluna}")
-        for coluna in colunas
-    }
+    rel_col = {"#".join(coluna.rsplit("_", 1)): F.col(coluna) for coluna in colunas}
     nested = create_nested_dict(rel_col)
     # dx.printSchema()
 
-    dx = dx.withColumn("metricas", nested_to_json(nested))
+    dx = dx.withColumn(
+        "metricas",
+        nested_to_json(nested, metrics_default_values=handler.metrics_default_values),
+    )
     dx = handler.to_dynamo_schema(dx)
     DataWriter.save(
         dx,
