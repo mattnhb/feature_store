@@ -46,19 +46,30 @@ def nested_to_json(nested_dict, metrics_default_values):
 
 
 spark = SparkSession.builder.appName("Python Spark SQL basic example").getOrCreate()
-
+spark.sparkContext.setCheckpointDir("path/to/checkpoint")
 relation = {
     "cliente": ("client_id",),
     "estabelecimento": ("estabelecimento",),
     "cliente_estabelecimento": ("client_id", "estabelecimento"),
 }
 for vision in relation:
+    df = (
+        spark.read.format("parquet")
+        .load(f"AGGREGATED/visao={vision}/")
+        .filter(F.col("data_processamento") == "2023-07-30")
+        .drop("data_processamento")
+        .repartition(10)
+    )
+    # df = df.checkpoint()
+    print(f"{df.rdd.getNumPartitions()=}")
+    df.show()
+    continue
     handler = POSSIBILITIES.get("debito")(vision)
 
     dx = (
         spark.read.format("json")
-        .load(f"AGGREGATED/visao={vision}/")
-        .filter(F.col("data_processamento") == "2023-07-28")
+        .load(f"AGGREGATED1/visao={vision}/")
+        .filter(F.col("data_processamento") == "2023-07-29")
         .drop("data_processamento")
     )
     # print(f"{vision=}")
@@ -105,15 +116,17 @@ for vision in relation:
         nested_to_json(nested, metrics_default_values=handler.metrics_default_values),
     )
     dx = handler.to_dynamo_schema(dx)
-    DataWriter.save(
-        dx,
-        writing_details={
-            "partitions": ["visao"],
-            "saving_path": "aqui4",
-            "saving_format": "json",
-            "saving_mode": "overwrite",
-        },
-    )
+    print("printando")
+    dx.show()
+    # DataWriter.save(
+    #     dx,
+    #     writing_details={
+    #         "partitions": ["visao"],
+    #         "saving_path": "aqui4",
+    #         "saving_format": "json",
+    #         "saving_mode": "overwrite",
+    #     },
+    # )
     # dx.show()
 
     # print(f"{dx.schema.json()=}")

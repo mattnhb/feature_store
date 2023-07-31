@@ -28,6 +28,9 @@ class DebitoAggregator(BaseAggregator):
         super().__init__()
 
     def create_aggregations(self, df: DataFrame):
+        print(f"{df.rdd.getNumPartitions()=}")
+        # print(f"total linhas nos snapshots -> {df.count()}")
+        # df.count()
         aggregated: DataFrame = self.create_general_unified_aggregations(
             df,
             grouped_by=self.vision.get("grouped_by"),
@@ -42,7 +45,7 @@ class DebitoAggregator(BaseAggregator):
         return aggregated.withColumn(
             "visao",
             F.lit(self.vision_name),
-        ).distinct()
+        )  # .cache().persist()#.distinct()
 
     def _count_field_distinct(self, df: DataFrame) -> List[DataFrame]:
         if self.vision_name == "cliente_estabelecimento":

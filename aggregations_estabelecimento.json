@@ -255,7 +255,7 @@
       "data_processamento"
     ],
     "saving_path": "AGGREGATED",
-    "saving_format": "json",
+    "saving_format": "parquet",
     "saving_mode": "overwrite"
   }
 }

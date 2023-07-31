@@ -45,20 +45,20 @@ class DataContractParser:
         )
 
     def apply_transformation(self, df: DataFrame) -> DataFrame:
-        print(f"{df.count()=}")
+        # print(f"{df.count()=}")
         logger.info(
             "Applying transformations %s",
             self.__content.get("transformations", {}),
         )
-        df.show()
-        df.printSchema()
+        # df.show()
+        # df.printSchema()
         return DataTransformer.transform(
             df,
             transformation_details=self.__content.get("transformations", {}),
         )
 
     def apply_sanitization(self, df: DataFrame) -> DataFrame:
-        print(f"{df.count()=}")
+        # print(f"{df.count()=}")
         logger.info("Applying sanitization %s", self.__content.get("sanitization", {}))
         df.show()
         df.printSchema()
@@ -78,6 +78,6 @@ class DataContractParser:
     def create_snapshots(self):
         df = self.extract()
         df.show(truncate=False)
-        df.printSchema()
-        print(df.count())
+        # df.printSchema()
+        # print(df.count())
         DataWriter.save(df, writing_details=self.__content.get("writing"))

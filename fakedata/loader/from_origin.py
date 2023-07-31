@@ -17,9 +17,9 @@ fake = Faker()
 Faker.seed(0)
 
 valores_datas: List[datetime] = [
-    fake.date_time_between(start_date="-1y") for _ in range(30000)
+    fake.date_time_between(start_date="-1y") for _ in range(3000)
 ]
-valores_client_id = [fake.uuid4() for _ in range(20)]
+valores_client_id = [fake.uuid4() for _ in range(100)]
 
 valores_produto_origem: List[str] = [
     "CARDLESS",
@@ -45,7 +45,7 @@ valores_produto_origem: List[str] = [
     "SAQUE INTERNACIONAL",
 ]
 
-valores_destino: List[str] = ["24234234", "53523525", "90090990"]
+valores_destino: List[str] = [fake.uuid4() for _ in range(100)]
 
 valores_status_transacao: List[str] = [
     "00",

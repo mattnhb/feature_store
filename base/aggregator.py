@@ -31,6 +31,7 @@ class BaseAggregator(ABC):
                 .groupBy(*grouped_by)
                 .agg(*self.mf.create_expressions(metrics))
                 .transform(lambda _df: self.dimf.create_columns(_df, combination))
+                # .cache().persist()
                 for combination in [
                     dict(zip(dimensions.keys(), combination))
                     for combination in product(*list(dimensions.values()))

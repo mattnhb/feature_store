@@ -8,7 +8,6 @@ from pyspark.sql import functions as F
 
 
 def union_frames(frames: List[DataFrame]) -> DataFrame:
-    print(f"{frames=}")
     return reduce(
         lambda df1, df2: df1.unionByName(df2, allowMissingColumns=True),
         frames,
