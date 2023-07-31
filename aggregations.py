@@ -70,10 +70,15 @@ def nested_to_json(nested_dict, metrics_default_values):
 
 spark = (
     SparkSession.builder.appName("Create Aggregations")
+    .config("spark.executor.instances", 3)
+    # .master("local[4]")
+    .config("spark.driver.memory", "6g")
+    .config("spark.executor.memory", "6g")
+
     # .config("spark.sql.shuffle.partitions", 400)
     # .config("spark.default.parallelism", 400)
-    .config("spark.executor.cores", "6")
-    .config("spark.sql.objectHashAggregate.sortBased.fallbackThreshold", "1024")
+    # .config("spark.executor.cores", "6")
+    # .config("spark.sql.objectHashAggregate.sortBased.fallbackThreshold", "1024")
     .getOrCreate()
 )
 spark.sparkContext.setCheckpointDir("check_agg")
@@ -83,7 +88,7 @@ VISAO = {
     "client_id-estabelecimento": "cliente_estabelecimento",
 }
 
-DAYS_AGO = 365
+DAYS_AGO = 10
 
 POSSIBILITIES: Dict[str, Any] = {
     "debito": DebitoAggregator,
@@ -116,7 +121,7 @@ class DataContractParser:
         )
         # df.checkpoint()
         df = jsonify(df, self.vision)
-        df = add_processing_date_column(df)
+        # df = add_processing_date_column(df)
         # print(f"{df.rdd.getNumPartitions()=}")
         # df.show(truncate=False)
         print("bora escrever")

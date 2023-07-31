@@ -23,6 +23,6 @@ class DataWriter:
             .option("ignoreNullFields", False)
             .format(writing_details.get("saving_format"))
             .mode(writing_details.get("saving_mode"))
-            .partitionBy(*writing_details.get("partitions"))
+            # .partitionBy(*writing_details.get("partitions"))
             .save(writing_details.get("saving_path"))
         )

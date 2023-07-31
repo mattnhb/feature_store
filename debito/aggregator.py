@@ -28,7 +28,7 @@ class DebitoAggregator(BaseAggregator):
         super().__init__()
 
     def create_aggregations(self, df: DataFrame):
-        print(f"{df.rdd.getNumPartitions()=}")
+        # print(f"{df.rdd.getNumPartitions()=}")
         # print(f"total linhas nos snapshots -> {df.count()}")
         # df.count()
         aggregated: DataFrame = self.create_general_unified_aggregations(
