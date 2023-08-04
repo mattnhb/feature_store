@@ -46,32 +46,32 @@ def nested_to_json(nested_dict, metrics_default_values):
 
 
 spark = SparkSession.builder.appName("Python Spark SQL basic example").getOrCreate()
-spark.sparkContext.setCheckpointDir("path/to/checkpoint")
+# spark.sparkContext.setCheckpointDir("path/to/checkpoint")
 relation = {
     "cliente": ("client_id",),
     "estabelecimento": ("estabelecimento",),
     "cliente_estabelecimento": ("client_id", "estabelecimento"),
 }
 for vision in relation:
-    df = (
+    dx = (
         spark.read.format("parquet")
-        .load(f"AGGREGATED/visao={vision}/")
-        .filter(F.col("data_processamento") == "2023-07-30")
+        .load("new_aggregated")
+        # .filter(F.col("data_processamento") == "2023-07-30")
         .drop("data_processamento")
         .repartition(10)
     )
     # df = df.checkpoint()
-    print(f"{df.rdd.getNumPartitions()=}")
-    df.show()
-    continue
+    print(f"{dx.rdd.getNumPartitions()=}")
+    dx.show()
+    # continue
     handler = POSSIBILITIES.get("debito")(vision)
 
-    dx = (
-        spark.read.format("json")
-        .load(f"AGGREGATED1/visao={vision}/")
-        .filter(F.col("data_processamento") == "2023-07-29")
-        .drop("data_processamento")
-    )
+    # dx = (
+    #     spark.read.format("json")
+    #     .load(f"AGGREGATED1/visao={vision}/")
+    #     .filter(F.col("data_processamento") == "2023-07-29")
+    #     .drop("data_processamento")
+    # )
     # print(f"{vision=}")
 
     first_colunas = list(
@@ -118,6 +118,7 @@ for vision in relation:
     dx = handler.to_dynamo_schema(dx)
     print("printando")
     dx.show()
+    break
     # DataWriter.save(
     #     dx,
     #     writing_details={

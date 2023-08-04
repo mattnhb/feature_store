@@ -37,6 +37,7 @@ class DebitoAggregator(BaseAggregator):
             dimensions=self.vision.get("general", {}).get("dimensions", {}),
             metrics=self.vision.get("general").get("metrics", {}),
         )
+        exit()
         if specific := self.create_specific_unified_aggregations(
             df, enabled=self.vision.get("specific", False)
         ):

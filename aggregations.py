@@ -74,7 +74,6 @@ spark = (
     # .master("local[4]")
     .config("spark.driver.memory", "6g")
     .config("spark.executor.memory", "6g")
-
     # .config("spark.sql.shuffle.partitions", 400)
     # .config("spark.default.parallelism", 400)
     # .config("spark.executor.cores", "6")
@@ -88,7 +87,7 @@ VISAO = {
     "client_id-estabelecimento": "cliente_estabelecimento",
 }
 
-DAYS_AGO = 10
+DAYS_AGO = 365
 
 POSSIBILITIES: Dict[str, Any] = {
     "debito": DebitoAggregator,
@@ -111,7 +110,7 @@ class DataContractParser:
             .load((self.__content.get("reading").get("path")))
             .where((F.col("anomesdia") >= F.lit(_get_days_ago_predicate(DAYS_AGO))))
             # .repartition(200)
-        )#.cache()
+        )  # .cache()
 
     def apply_aggregations(self) -> DataFrame:
         df = POSSIBILITIES.get(self.__content.get("feature_store"))(
@@ -119,29 +118,19 @@ class DataContractParser:
         ).create_aggregations(
             df=self.extract(),
         )
-        # df.checkpoint()
+
+        # exit()
         df = jsonify(df, self.vision)
-        # df = add_processing_date_column(df)
-        # print(f"{df.rdd.getNumPartitions()=}")
-        # df.show(truncate=False)
+        df.show()
+        df.printSchema()
         print("bora escrever")
-        # print(f"{df.count()}")
-        # df.cache()
-        DataWriter.save(df, writing_details=self.__content.get("writing"))
+        # DataWriter.save(df, writing_details=self.__content.get("writing"))
 
 
 def jsonify(df, vision):
     handler = POSSIBILITIES2.get("debito")(vision)
 
-    # dx = (
-    #     spark.read.format("json")
-    #     .load(f"AGGREGATED/visao={vision}/")
-    #     .filter(F.col("data_processamento") == "2023-07-29")
-    #     .drop("data_processamento")
-    # )
-    # print(f"{vision=}")
-    # dx = df.cache().persist()
-    dx = df  # .cache()
+    dx = df
     first_colunas = list(
         filter(
             lambda coluna: coluna

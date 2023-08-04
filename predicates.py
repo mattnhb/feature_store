@@ -25,19 +25,19 @@ class PredicateFactory:
     @staticmethod
     def field_last_n_days(key: str, value: str):
         return F.datediff(F.current_date(), value) <= F.lit(
-            int(re.match(r"^ultimos_(\d+)_dias$", key)[1])
+            int(re.match(r"^ultimos(\d+)Dias$", key)[1])
         )
 
     @staticmethod
     def field_date_in_condition(key: str, value: str):
         _predicates = {
-            "final_semana": lambda: F.dayofweek(value).isin([1, 7]),
+            "finalSemana": lambda: F.dayofweek(value).isin([1, 7]),
             "noturno": lambda: (F.hour(value) >= 22) | (F.hour(value) < 6),
             "diurno": lambda: ~(F.hour(value) >= 22) | (F.hour(value) < 6),
-            "dia_1_8": lambda: (F.dayofmonth(value).isin(day_number_range(key))),
-            "dia_9_16": lambda: (F.dayofmonth(value).isin(day_number_range(key))),
-            "dia_17_24": lambda: (F.dayofmonth(value).isin(day_number_range(key))),
-            "dia_25_31": lambda: (F.dayofmonth(value).isin(day_number_range(key))),
+            "dia1A8": lambda: (F.dayofmonth(value).isin(day_number_range(key))),
+            "dia9A16": lambda: (F.dayofmonth(value).isin(day_number_range(key))),
+            "dia17A24": lambda: (F.dayofmonth(value).isin(day_number_range(key))),
+            "dia25A31": lambda: (F.dayofmonth(value).isin(day_number_range(key))),
             "geral": lambda: geral(),
         }
         return _predicates.get(key, lambda: geral)()

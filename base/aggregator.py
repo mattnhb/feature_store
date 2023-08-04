@@ -11,6 +11,7 @@ from dimensions import DimensionsFactory
 from metrics import MetricsFactory
 from predicates import PredicateFactory
 from utils import get_vision_name, union_frames
+from data_writer import DataWriter
 
 
 class BaseAggregator(ABC):
@@ -23,21 +24,30 @@ class BaseAggregator(ABC):
     def create_general_unified_aggregations(
         self, df: DataFrame, grouped_by, dimensions, metrics
     ) -> DataFrame:
-        return union_frames(
-            [
-                df.filter(
-                    reduce(and_, self.pf.dispatcher(combination)),
-                )
-                .groupBy(*grouped_by)
-                .agg(*self.mf.create_expressions(metrics))
-                .transform(lambda _df: self.dimf.create_columns(_df, combination))
-                # .cache().persist()
-                for combination in [
-                    dict(zip(dimensions.keys(), combination))
-                    for combination in product(*list(dimensions.values()))
-                ]
+        [
+            (print("escrevendo,,,"),
+            DataWriter.save(
+                (
+                    df.filter(
+                        reduce(and_, self.pf.dispatcher(combination)),
+                    )
+                    .groupBy(*grouped_by)
+                    .agg(*self.mf.create_expressions(metrics))
+                    .transform(lambda _df: self.dimf.create_columns(_df, combination))
+                    # .cache().persist()
+                ),
+                writing_details={
+                    "partitions": ["subproduto", "janela", "periodo"],
+                    "saving_path": "new_aggregated",
+                    "saving_format": "parquet",
+                    "saving_mode": "overwrite",
+                },
+            ))
+            for combination in [
+                dict(zip(dimensions.keys(), combination))
+                for combination in product(*list(dimensions.values()))
             ]
-        )
+        ]
 
     @abstractmethod
     def create_specific_unified_aggregations(

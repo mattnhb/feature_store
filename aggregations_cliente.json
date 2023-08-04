@@ -13,13 +13,13 @@
         "dimensions": {
           "subproduto": [
             {
-              "debito_com_autenticacao": "subproduto"
+              "debitoComAutenticacao": "subproduto"
             },
             {
-              "debito_sem_autenticacao": "subproduto"
+              "debitoSemAutenticacao": "subproduto"
             },
             {
-              "contactless_sem_autentificacao": "subproduto"
+              "contactlessSemAutentificacao": "subproduto"
             },
             {
               "geral": "subproduto"
@@ -27,22 +27,22 @@
           ],
           "janela": [
             {
-              "ultimos_7_dias": "data_transacao"
+              "ultimos7Dias": "data_transacao"
             },
             {
-              "ultimos_30_dias": "data_transacao"
+              "ultimos30Dias": "data_transacao"
             },
             {
-              "ultimos_90_dias": "data_transacao"
+              "ultimos90Dias": "data_transacao"
             },
             {
-              "ultimos_180_dias": "data_transacao"
+              "ultimos180Dias": "data_transacao"
             },
             {
-              "ultimos_270_dias": "data_transacao"
+              "ultimos270Dias": "data_transacao"
             },
             {
-              "ultimos_365_dias": "data_transacao"
+              "ultimos365Dias": "data_transacao"
             }
           ],
           "periodo": [
@@ -53,19 +53,19 @@
               "noturno": "data_transacao"
             },
             {
-              "final_semana": "data_transacao"
+              "finalSemana": "data_transacao"
             },
             {
-              "dia_1_8": "data_transacao"
+              "dia1A8": "data_transacao"
             },
             {
-              "dia_9_16": "data_transacao"
+              "dia9A16": "data_transacao"
             },
             {
-              "dia_17_24": "data_transacao"
+              "dia17A24": "data_transacao"
             },
             {
-              "dia_25_31": "data_transacao"
+              "dia25A31": "data_transacao"
             },
             {
               "geral": "data_transacao"
@@ -74,7 +74,7 @@
         },
         "metrics": [
           {
-            "count_distinct": [
+            "countDistinct": [
               "estabelecimento",
               "countDistinctEstabelecimento"
             ]
@@ -104,51 +104,51 @@
             ]
           },
           {
-            "cluster-0-500": [
+            "cluster0A500": [
               "valor",
-              "cluster0to500Valor"
+              "cluster0A500Valor"
             ]
           },
           {
-            "cluster-500-1000": [
+            "cluster500A1000": [
               "valor",
-              "cluster500to1000Valor"
+              "cluster500A1000Valor"
             ]
           },
           {
-            "cluster-1000-2000": [
+            "cluster1000A2000": [
               "valor",
-              "cluster1000to2000Valor"
+              "cluster1000A2000Valor"
             ]
           },
           {
-            "cluster-2000-3000": [
+            "cluster2000A3000": [
               "valor",
-              "cluster2000to3000Valor"
+              "cluster2000A3000Valor"
             ]
           },
           {
-            "cluster-3000-5000": [
+            "cluster3000A5000": [
               "valor",
-              "cluster3000to5000Valor"
+              "cluster3000A5000Valor"
             ]
           },
           {
-            "cluster-5000-7000": [
+            "cluster5000A7000": [
               "valor",
-              "cluster5000to7000Valor"
+              "cluster5000A7000Valor"
             ]
           },
           {
-            "cluster-7000-10000": [
+            "cluster7000A10000": [
               "valor",
-              "cluster7000to10000Valor"
+              "cluster7000A10000Valor"
             ]
           },
           {
-            "cluster-beyond-10000": [
+            "clusterBeyond10000": [
               "valor",
-              "clusterBeyond10000Valor"
+              "clusterAcima10000Valor"
             ]
           },
           {
@@ -170,9 +170,9 @@
             ]
           },
           {
-            "desviopadrao": [
+            "desvioPadrao": [
               "valor",
-              "desviopadraoValor"
+              "desvioPadraoValor"
             ]
           },
           {

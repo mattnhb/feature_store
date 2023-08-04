@@ -27,11 +27,11 @@ def _is_percentile(metric_name):
 
 
 def _is_cluster_between(metric_name):
-    return re.match(r"^cluster-(\d+)-(\d+)$", metric_name)
+    return re.match(r"^cluster(\d+)A(\d+)$", metric_name)
 
 
 def _is_cluster_beyond(metric_name):
-    return re.match(r"^cluster-beyond-(\d+)$", metric_name)
+    return re.match(r"^clusterBeyond(\d+)$", metric_name)
 
 
 class MetricsFactory:
@@ -41,10 +41,10 @@ class MetricsFactory:
             "media": lambda coluna: F.mean(coluna),
             "maximo": lambda coluna: F.max(coluna),
             "minimo": lambda coluna: F.min(coluna),
-            "desviopadrao": lambda coluna: F.stddev(coluna),
+            "desvioPadrao": lambda coluna: F.stddev(coluna),
             "mediana": lambda coluna: F.expr(f"percentile({coluna}, 0.5)"),
             "count": lambda coluna: F.count(coluna),
-            "count_distinct": lambda coluna: F.count_distinct(coluna),
+            "countDistinct": lambda coluna: F.count_distinct(coluna),
             # "amount-days-min-max": lambda coluna:
         }
 

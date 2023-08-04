@@ -13,9 +13,7 @@ class DataWriter:
         )
         (
             df.select(*writing_details.get("columns_to_keep", ["*"]))
-            # .repartition(50)
-            # .coalesce(1)
-            # .repartition(*writing_details.get("partitions"))
+            .repartition(*writing_details.get("partitions"))
             .write.option(
                 "partitionOverwriteMode",
                 writing_details.get("partitionOverwriteMode", "dynamic"),
@@ -23,6 +21,6 @@ class DataWriter:
             .option("ignoreNullFields", False)
             .format(writing_details.get("saving_format"))
             .mode(writing_details.get("saving_mode"))
-            # .partitionBy(*writing_details.get("partitions"))
+            .partitionBy(*writing_details.get("partitions"))
             .save(writing_details.get("saving_path"))
         )
