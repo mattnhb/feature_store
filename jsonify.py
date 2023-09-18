@@ -58,7 +58,7 @@ for vision in relation:
         .load("new_aggregated")
         # .filter(F.col("data_processamento") == "2023-07-30")
         .drop("data_processamento")
-        .repartition(10)
+        # .repartition(10)
     )
     # df = df.checkpoint()
     print(f"{dx.rdd.getNumPartitions()=}")
@@ -117,7 +117,7 @@ for vision in relation:
     )
     dx = handler.to_dynamo_schema(dx)
     print("printando")
-    dx.show()
+    dx.withColumn("data_processamento", F.lit("2023-08-08")).show()
     break
     # DataWriter.save(
     #     dx,

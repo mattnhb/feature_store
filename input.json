@@ -46,7 +46,7 @@
       "anomesdia",
       "subproduto"
     ],
-    "saving_path": "S3",
+    "saving_path": "S32",
     "saving_format": "parquet",
     "saving_mode": "overwrite"
   }

@@ -267,7 +267,7 @@
           }
         ]
       },
-      "specific": true
+      "specific": false
     }
   },
   "writing": {

@@ -25,24 +25,35 @@ class BaseAggregator(ABC):
         self, df: DataFrame, grouped_by, dimensions, metrics
     ) -> DataFrame:
         [
-            (print("escrevendo,,,"),
-            DataWriter.save(
-                (
-                    df.filter(
-                        reduce(and_, self.pf.dispatcher(combination)),
-                    )
-                    .groupBy(*grouped_by)
-                    .agg(*self.mf.create_expressions(metrics))
-                    .transform(lambda _df: self.dimf.create_columns(_df, combination))
-                    # .cache().persist()
+            (
+                df.filter(
+                            reduce(and_, self.pf.dispatcher(combination)),
+                        )
+                        .groupBy(*grouped_by)
+                        .agg(*self.mf.create_expressions(metrics))
+                        .transform(
+                            lambda _df: self.dimf.create_columns(_df, combination)
+                        ).show(n=5, truncate=False),
+                DataWriter.save(
+                    (
+                        df.filter(
+                            reduce(and_, self.pf.dispatcher(combination)),
+                        )
+                        .groupBy(*grouped_by)
+                        .agg(*self.mf.create_expressions(metrics))
+                        .transform(
+                            lambda _df: self.dimf.create_columns(_df, combination)
+                        )
+                        # .cache().persist()
+                    ),
+                    writing_details={
+                        "partitions": ["subproduto", "janela", "periodo"],
+                        "saving_path": "new_aggregated",
+                        "saving_format": "parquet",
+                        "saving_mode": "overwrite",
+                    },
                 ),
-                writing_details={
-                    "partitions": ["subproduto", "janela", "periodo"],
-                    "saving_path": "new_aggregated",
-                    "saving_format": "parquet",
-                    "saving_mode": "overwrite",
-                },
-            ))
+            )
             for combination in [
                 dict(zip(dimensions.keys(), combination))
                 for combination in product(*list(dimensions.values()))

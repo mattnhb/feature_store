@@ -11,9 +11,17 @@ class DataWriter:
             "Writing your data with the following configuration: %s",
             writing_details,
         )
+        threshold = 900
+        partition_factor = max(1, (df.count() // (threshold // 2)))
+        df = (
+            df.coalesce(1)
+            if partition_factor == 1
+            else df.repartition(partition_factor)
+        )
+        print(f"{df.count()=} {partition_factor=}")
         (
             df.select(*writing_details.get("columns_to_keep", ["*"]))
-            .repartition(*writing_details.get("partitions"))
+            # .repartition(*writing_details.get("partitions"))
             .write.option(
                 "partitionOverwriteMode",
                 writing_details.get("partitionOverwriteMode", "dynamic"),

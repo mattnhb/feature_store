@@ -87,7 +87,7 @@ VISAO = {
     "client_id-estabelecimento": "cliente_estabelecimento",
 }
 
-DAYS_AGO = 365
+DAYS_AGO = 20
 
 POSSIBILITIES: Dict[str, Any] = {
     "debito": DebitoAggregator,
@@ -113,14 +113,17 @@ class DataContractParser:
         )  # .cache()
 
     def apply_aggregations(self) -> DataFrame:
+        df = self.extract()
+        # df.show()
+        # exit()
         df = POSSIBILITIES.get(self.__content.get("feature_store"))(
             vision=self.__content.get("aggregations", {}).get(self.vision, {}),
         ).create_aggregations(
-            df=self.extract(),
+            df=df,
         )
 
         # exit()
-        df = jsonify(df, self.vision)
+        # df = jsonify(df, self.vision)
         df.show()
         df.printSchema()
         print("bora escrever")
