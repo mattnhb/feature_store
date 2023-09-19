@@ -1,15 +1,17 @@
-from datetime import datetime, timedelta, date
-from dateutil.relativedelta import relativedelta
-
-current_date = date.today()
-
-months_ago = 24
-first_day_first_month = current_date.replace(day=1) - relativedelta(
-    months=months_ago
-)
-last_day_last_month = current_date.replace(day=1) - timedelta(days=1)
+import re
 
 
-print("First day of the first month:", first_day_first_month.strftime("%Y-%m-%d"))
-print("Last day of the last month:", last_day_last_month.strftime("%Y-%m-%d"))
+
+
+
+pattern_dias = re.compile(r'ULTIMO(S)?(\d+)DIA(S)?', re.IGNORECASE)
+pattern_meses = re.compile(r'ULTIMO(S)?(\d+)MES(ES)?', re.IGNORECASE)
+
+for input_string in ("ultimos71dias", "ultimo1dia", "ultimos12meses", "ultimo1mes"):
+    if matches_dias := re.findall(pattern_dias, input_string):
+        print(f"{matches_dias[0][1]=}")
+    if matches_meses := re.findall(pattern_meses, input_string):
+        print(f"{matches_meses[0][1]=}")
+
+
 
