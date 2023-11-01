@@ -1,0 +1,78 @@
+Espelho
++-------+---------+-------+----+-----+
+|pagador|recebedor|quantia|soma|media|
++-------+---------+-------+----+-----+
+|  david|   romulo|      5|  20|    4|
+|  thais|   thiago|      5|  20|    4|
+| mateus|   romulo|      5|  20|    4|
+| mateus|   caique|      5|  20|    4|
+|  david|   thiago|      5|  20|    4|
++-------+---------+-------+----+-----+
+
+Novo
++-------+---------+------------+---------+----------+
+|pagador|recebedor|quantia_novo|soma_novo|media_novo|
++-------+---------+------------+---------+----------+
+|  thais|   romulo|           3|        3|         3|
+| mateus|   caique|           3|        3|         3|
+|  david|   romulo|           3|        3|         3|
+|  david|   caique|           3|        3|         3|
+|  thais|   thiago|           3|        3|         3|
+| mateus|   thiago|           3|        3|         3|
+| mateus|   romulo|           3|        3|         3|
+|  david|   thiago|           3|        3|         3|
++-------+---------+------------+---------+----------+
+
+Diferenca
++-------+---------+-------+----+-----+
+|pagador|recebedor|quantia|soma|media|
++-------+---------+-------+----+-----+
+|  thais|   romulo|      3|   3|  1.0|
+| mateus|   caique|      8|  23|2.875|
+|  david|   romulo|      8|  23|2.875|
+|  david|   caique|      3|   3|  1.0|
+|  thais|   thiago|      8|  23|2.875|
+| mateus|   thiago|      3|   3|  1.0|
+| mateus|   romulo|      8|  23|2.875|
+|  david|   thiago|      8|  23|2.875|
++-------+---------+-------+----+-----+
+
++-------+---------+-------+----+-----+-----------------+--------------+---------------+
+|pagador|recebedor|quantia|soma|media|quantia_diferenca|soma_diferenca|media_diferenca|
++-------+---------+-------+----+-----+-----------------+--------------+---------------+
+|  david|   caique|   null|null| null|                3|             3|            1.0|
+|  david|   romulo|      5|  20|    4|                8|            23|          2.875|
+|  david|   thiago|      5|  20|    4|                8|            23|          2.875|
+| mateus|   caique|      5|  20|    4|                8|            23|          2.875|
+| mateus|   romulo|      5|  20|    4|                8|            23|          2.875|
+| mateus|   thiago|   null|null| null|                3|             3|            1.0|
+|  thais|   romulo|   null|null| null|                3|             3|            1.0|
+|  thais|   thiago|      5|  20|    4|                8|            23|          2.875|
++-------+---------+-------+----+-----+-----------------+--------------+---------------+
+
+Novo Espelho
++-------+---------+-------+----+-----+
+|pagador|recebedor|quantia|soma|media|
++-------+---------+-------+----+-----+
+|  david|   caique|      3|   3|  1.0|
+|  david|   romulo|      8|  23|2.875|
+|  david|   thiago|      8|  23|2.875|
+| mateus|   caique|      8|  23|2.875|
+| mateus|   romulo|      8|  23|2.875|
+| mateus|   thiago|      3|   3|  1.0|
+|  thais|   romulo|      3|   3|  1.0|
+|  thais|   thiago|      8|  23|2.875|
++-------+---------+-------+----+-----+
+
++-------+---------+-------+----+-----+
+|pagador|recebedor|quantia|soma|media|
++-------+---------+-------+----+-----+
+|  david|   caique|      3|   3|  1.0|
+|  david|   romulo|      8|  23|2.875|
+|  david|   thiago|      8|  23|2.875|
+| mateus|   caique|      8|  23|2.875|
+| mateus|   romulo|      8|  23|2.875|
+| mateus|   thiago|      3|   3|  1.0|
+|  thais|   romulo|      3|   3|  1.0|
+|  thais|   thiago|      8|  23|2.875|
++-------+---------+-------+----+-----+
