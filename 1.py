@@ -1,17 +1,11 @@
-import json
-
-def lambda_handler(event, context):
-
-    from boto3 import client
-
-    conn = client('s3')  # again assumes boto.cfg setup, assume AWS S3
-    response = conn.list_objects_v2(
-        Bucket='mattnrepl',
-        Prefix='aquiteste/testelistbu/')
-    print(response)
-    files = [content['Key'] for content in response.get('Contents', [])]
-    return {
-        "len": len(files),
-        "files": files
-    }
- 
+    return df.withColumn(
+    "telefone",
+    F.when(
+        (F.length(F.col("telefone")) == 10) & (F.substring("telefone", 3, 1).isin("6", "7", "8", "9")),
+        F.concat(
+            F.substring(F.col("telefone"), 1, 2),
+            F.lit("9"),
+            F.substring(F.col("telefone"), 3, 8),
+        ),
+    ).otherwise(F.col("telefone")),
+)
